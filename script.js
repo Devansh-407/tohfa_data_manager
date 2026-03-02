@@ -54,12 +54,29 @@ const templates = {
         "contactItems": []
     },
     'navigation': {
-        "_instructions": "Update your website navigation menu here.",
+        "_instructions": "SISTER: Update your website navigation menu here.",
         "_fields": {
             "name": "Menu item name as shown to customers",
             "href": "Link destination URL"
         },
-        "navItems": []
+        "navItems": [
+            {
+                "name": "Home",
+                "href": "/"
+            },
+            {
+                "name": "About",
+                "href": "/about"
+            },
+            {
+                "name": "Gifts",
+                "href": "/gifts"
+            },
+            {
+                "name": "Contact",
+                "href": "/contact"
+            }
+        ]
     },
     'testimonials': {
         "_instructions": "Update your customer testimonials here.",
@@ -924,6 +941,31 @@ function getExampleData(type) {
             "topSelling": {
                 "productIds": ["1", "2", "3", "4", "5"]
             }
+        },
+        'navigation': {
+            "_instructions": "SISTER: Update your website navigation menu here.",
+            "_fields": {
+                "name": "Menu item name as shown to customers",
+                "href": "Link destination URL"
+            },
+            "navItems": [
+                {
+                    "name": "Home",
+                    "href": "/"
+                },
+                {
+                    "name": "About",
+                    "href": "/about"
+                },
+                {
+                    "name": "Gifts",
+                    "href": "/gifts"
+                },
+                {
+                    "name": "Contact",
+                    "href": "/contact"
+                }
+            ]
         }
     };
     
