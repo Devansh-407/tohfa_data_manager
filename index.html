@@ -68,16 +68,48 @@
                 </div>
             </div>
 
-            <div class="data-card" onclick="openManager('about')">
+            <div class="data-card" onclick="openManager('about-values')">
                 <div class="card-icon">
-                    <i class="fas fa-file-alt"></i>
+                    <i class="fas fa-heart"></i>
                 </div>
                 <div class="card-content">
-                    <h3>About</h3>
-                    <p>Update your company story and information</p>
+                    <h3>About Values</h3>
+                    <p>Manage "Why Choose" and "Values" sections</p>
                     <div class="card-footer">
-                        <span class="filename">about.json</span>
-                        <button class="template-btn" onclick="event.stopPropagation(); downloadTemplate('about')">
+                        <span class="filename">about-values.json</span>
+                        <button class="template-btn" onclick="event.stopPropagation(); downloadTemplate('about-values')">
+                            <i class="fas fa-download"></i> Template
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-card" onclick="openManager('contact-info')">
+                <div class="card-icon">
+                    <i class="fas fa-phone"></i>
+                </div>
+                <div class="card-content">
+                    <h3>Contact Info</h3>
+                    <p>Manage contact information and business details</p>
+                    <div class="card-footer">
+                        <span class="filename">contact-info.json</span>
+                        <button class="template-btn" onclick="event.stopPropagation(); downloadTemplate('contact-info')">
+                            <i class="fas fa-download"></i> Template
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-card" onclick="openManager('navigation')">
+                <div class="card-icon">
+                    <i class="fas fa-compass"></i>
+                </div>
+                <div class="card-content">
+                    <h3>Navigation</h3>
+                    <p>Manage website navigation menu</p>
+                    <div class="card-footer">
+                        <span class="filename">navigation.json</span>
+                        <button class="template-btn" onclick="event.stopPropagation(); downloadTemplate('navigation')">
                             <i class="fas fa-download"></i> Template
                         </button>
                     </div>
@@ -94,22 +126,6 @@
                     <div class="card-footer">
                         <span class="filename">categories.json</span>
                         <button class="template-btn" onclick="event.stopPropagation(); downloadTemplate('categories')">
-                            <i class="fas fa-download"></i> Template
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="data-card" onclick="openManager('contact')">
-                <div class="card-icon">
-                    <i class="fas fa-users"></i>
-                </div>
-                <div class="card-content">
-                    <h3>Contact</h3>
-                    <p>Update contact information and business details</p>
-                    <div class="card-footer">
-                        <span class="filename">contact.json</span>
-                        <button class="template-btn" onclick="event.stopPropagation(); downloadTemplate('contact')">
                             <i class="fas fa-download"></i> Template
                         </button>
                     </div>
@@ -134,7 +150,7 @@
 
             <div class="data-card" onclick="openManager('testimonials')">
                 <div class="card-icon">
-                    <i class="fas fa-chart-line"></i>
+                    <i class="fas fa-comment"></i>
                 </div>
                 <div class="card-content">
                     <h3>Testimonials</h3>
@@ -142,22 +158,6 @@
                     <div class="card-footer">
                         <span class="filename">testimonials.json</span>
                         <button class="template-btn" onclick="event.stopPropagation(); downloadTemplate('testimonials')">
-                            <i class="fas fa-download"></i> Template
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="data-card" onclick="openManager('site-config')">
-                <div class="card-icon">
-                    <i class="fas fa-cog"></i>
-                </div>
-                <div class="card-content">
-                    <h3>Site Config</h3>
-                    <p>Update website configuration and settings</p>
-                    <div class="card-footer">
-                        <span class="filename">site-config.json</span>
-                        <button class="template-btn" onclick="event.stopPropagation(); downloadTemplate('site-config')">
                             <i class="fas fa-download"></i> Template
                         </button>
                     </div>
@@ -174,6 +174,54 @@
                     <div class="card-footer">
                         <span class="filename">top-selling.json</span>
                         <button class="template-btn" onclick="event.stopPropagation(); downloadTemplate('top-selling')">
+                            <i class="fas fa-download"></i> Template
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-card" onclick="openManager('about')">
+                <div class="card-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+                <div class="card-content">
+                    <h3>About</h3>
+                    <p>Manage company information and story</p>
+                    <div class="card-footer">
+                        <span class="filename">about.json</span>
+                        <button class="template-btn" onclick="event.stopPropagation(); downloadTemplate('about')">
+                            <i class="fas fa-download"></i> Template
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-card" onclick="openManager('contact')">
+                <div class="card-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="card-content">
+                    <h3>Contact</h3>
+                    <p>Manage contact page information</p>
+                    <div class="card-footer">
+                        <span class="filename">contact.json</span>
+                        <button class="template-btn" onclick="event.stopPropagation(); downloadTemplate('contact')">
+                            <i class="fas fa-download"></i> Template
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-card" onclick="openManager('site-config')">
+                <div class="card-icon">
+                    <i class="fas fa-cog"></i>
+                </div>
+                <div class="card-content">
+                    <h3>Site Config</h3>
+                    <p>Manage website configuration and settings</p>
+                    <div class="card-footer">
+                        <span class="filename">site-config.json</span>
+                        <button class="template-btn" onclick="event.stopPropagation(); downloadTemplate('site-config')">
                             <i class="fas fa-download"></i> Template
                         </button>
                     </div>

@@ -29,6 +29,309 @@ const templates = {
         },
         "products": []
     },
+    'about-values': {
+        "_instructions": "Update your about page values and why choose section here.",
+        "_fields": {
+            "title": "Section title as shown to customers",
+            "description": "Detailed description for customers",
+            "link": "Call-to-action text or statistic",
+            "icon": "Lucide icon name (Heart, HandHeart, Clock, Leaf, Users, Ribbon)"
+        },
+        "whyChoose": [],
+        "values": []
+    },
+    'contact-info': {
+        "_instructions": "Update your contact information here.",
+        "_fields": {
+            "title": "Contact section title",
+            "description": "Description for customers",
+            "phone": "Phone number",
+            "email": "Email address",
+            "buttonText": "Button text",
+            "icon": "Lucide icon name (Phone, Gift, Headphones)",
+            "buttonColor": "Button color (purple or green)"
+        },
+        "contactItems": []
+    },
+    'navigation': {
+        "_instructions": "Update your website navigation menu here.",
+        "_fields": {
+            "name": "Menu item name as shown to customers",
+            "href": "Link destination URL"
+        },
+        "navItems": []
+    },
+    'testimonials': {
+        "_instructions": "Update your customer testimonials here.",
+        "_fields": {
+            "id": "Unique testimonial ID",
+            "name": "Customer name",
+            "location": "Customer location and occasion",
+            "rating": "Rating from 1-5",
+            "comment": "Customer review text",
+            "image": "Customer photo filename (optional)"
+        },
+        "testimonials": []
+    },
+    'categories': {
+        "_instructions": "SISTER: Update your shop categories here. These appear on the home page.",
+        "_fields": {
+            "name": "Category name as shown to customers",
+            "description": "Category description for customers",
+            "image": "Image filename in /public folder",
+            "href": "Link to filtered products (keep the ?category= part)"
+        },
+        "categories": [
+            {
+                "name": "Gift Hamper",
+                "description": "Curated collections of premium items beautifully packaged for the perfect gifting experience.",
+                "image": "/elegant-gift-boxes-with-pink-ribbons-on-white-back.jpg",
+                "href": "/gifts?category=gift-hamper"
+            },
+            {
+                "name": "Gift Box",
+                "description": "Elegant gift boxes filled with carefully selected items tailored to your special occasion.",
+                "image": "/vintage-wooden-jewelry-box-with-rose-patterns.jpg",
+                "href": "/gifts?category=gift-box"
+            },
+            {
+                "name": "Bouquet",
+                "description": "Beautiful handcrafted bouquets made with premium materials and artistic arrangements.",
+                "image": "/luxury-flower-bouquet-with-roses-and-lilies.jpg",
+                "href": "/gifts?category=bouquet"
+            },
+            {
+                "name": "Miniature",
+                "description": "Delicate miniature creations perfect for collectors and unique gift ideas.",
+                "image": "/miniature-handcrafted-dollhouse-furniture.jpg",
+                "href": "/gifts?category=miniature"
+            },
+            {
+                "name": "Frame",
+                "description": "Custom frames and photo displays to preserve your precious memories.",
+                "image": "/elegant-wooden-photo-frame-with-engraved-details.jpg",
+                "href": "/gifts?category=frame"
+            }
+        ]
+    },
+    'occasions': {
+        "_instructions": "SISTER: Update your shop occasions here. These appear on the home page.",
+        "_fields": {
+            "name": "Occasion name as shown to customers",
+            "description": "Occasion description for customers",
+            "image": "Image filename in /public folder",
+            "href": "Link to filtered products (keep the ?occasion= part)"
+        },
+        "occasions": [
+            {
+                "name": "Anniversary",
+                "description": "Celebrate your love story with personalized keepsakes that capture your cherished memories.",
+                "image": "/anniversary-gifts-romantic-setup.jpg",
+                "href": "/gifts?occasion=anniversary"
+            },
+            {
+                "name": "Birthday",
+                "description": "Make their special day unforgettable with unique, personalized gifts tailored to their personality.",
+                "image": "/birthday-celebration-colorful-gifts.jpg",
+                "href": "/gifts?occasion=birthday"
+            },
+            {
+                "name": "Proposal",
+                "description": "Create the perfect moment with romantic proposal setups and custom engagement gifts.",
+                "image": "/romantic-proposal-setup-with-roses.jpg",
+                "href": "/gifts?occasion=proposal"
+            },
+            {
+                "name": "Wedding",
+                "description": "Elegant and thoughtful gifts to celebrate the union of two souls beginning their journey together.",
+                "image": "/elegant-wedding-gifts-decorative-setup.jpg",
+                "href": "/gifts?occasion=wedding"
+            },
+            {
+                "name": "Graduation",
+                "description": "Commemorate academic achievements with meaningful gifts that mark this important milestone.",
+                "image": "/graduation-celebration-gifts-display.jpg",
+                "href": "/gifts?occasion=graduation"
+            },
+            {
+                "name": "Hulalal",
+                "description": "Celebrate your love story with personalized keepsakes",
+                "image": "/anniversary-image.jpg",
+                "href": "/gifts?occasion=hulalal"
+            }
+        ]
+    },
+    'top-selling': {
+        "_instructions": "Update your top selling product IDs here.",
+        "_fields": {
+            "productIds": "Array of product IDs that should be featured as top selling"
+        },
+        "topSelling": {
+            "productIds": []
+        }
+    },
+    'about': {
+        "_instructions": "SISTER: Update your about page content here.",
+        "_fields": {
+            "heroTitle": "Main title of about page",
+            "heroDescription": "Main description under title",
+            "storyTitle": "Our Story section title",
+            "storyContent": "Your business story paragraphs",
+            "missionTitle": "Mission section title",
+            "missionContent": "Your mission statement",
+            "values": "Your business values list"
+        },
+        "about": {
+            "heroTitle": "About The Tohfa Creations",
+            "heroDescription": "Handcrafted with love, personalized with care. Creating beautiful memories through unique handmade gifts.",
+            "story": {
+                "title": "Our Story",
+                "content": [
+                    "The Tohfa Creations began as a small dream in my workshop, surrounded by colorful papers, ribbons, and endless possibilities. What started as creating gifts for friends and family quickly grew into a passion for bringing joy to others through personalized, handmade creations.",
+                    "Every piece we create tells a story - your story. We believe that the best gifts are not just objects, but memories captured in tangible form. Whether it's a wedding album, a birthday keepsake, or an anniversary treasure, each item is crafted with attention to detail and filled with love.",
+                    "Over the years, we've had the privilege of being part of countless special moments - proposals, weddings, anniversaries, and celebrations of all kinds. Each commission has taught us something new about the art of gift-giving and the importance of personal touches."
+                ]
+            },
+            "mission": {
+                "title": "Our Mission",
+                "content": "To create beautiful, personalized handmade gifts that capture life's most precious moments and bring joy to both giver and receiver. We strive to make every gift a cherished memory that lasts a lifetime."
+            },
+            "values": [
+                {
+                    "title": "Handcrafted Quality",
+                    "description": "Every piece is meticulously crafted by hand with premium materials and attention to detail."
+                },
+                {
+                    "title": "Personalization",
+                    "description": "We believe in the power of personal touches and work closely with clients to create unique, meaningful gifts."
+                },
+                {
+                    "title": "Sustainability",
+                    "description": "We use eco-friendly materials and sustainable practices whenever possible to protect our planet."
+                },
+                {
+                    "title": "Customer Love",
+                    "description": "Your happiness is our priority. We go above and beyond to ensure every gift exceeds expectations."
+                }
+            ]
+        }
+    },
+    'contact': {
+        "_instructions": "SISTER: Update your contact information here.",
+        "_fields": {
+            "title": "Contact page title",
+            "description": "Contact page description",
+            "email": "Your business email",
+            "phone": "Your business phone",
+            "address": "Your business address",
+            "hours": "Your business hours",
+            "connectWithUs": "Connect With Us section",
+            "socialMedia": "Social media links with follower counts",
+            "recentPosts": "Recent posts section with Instagram/Facebook content"
+        },
+        "contact": {
+            "title": "Get in Touch",
+            "description": "Have a question or want to discuss a custom gift? We'd love to hear from you!",
+            "email": "hello@tohfacreations.com",
+            "phone": "+91 98765 43210",
+            "address": "123 Craft Street, Artisan Colony, Mumbai, Maharashtra 400001",
+            "hours": {
+                "weekdays": "Monday - Friday: 10:00 AM - 7:00 PM",
+                "saturday": "Saturday: 10:00 AM - 5:00 PM",
+                "sunday": "Sunday: Closed"
+            },
+            "connectWithUs": {
+                "title": "Connect With Us",
+                "description": "Follow us on social media for inspiration, behind-the-scenes content, and special offers."
+            },
+            "socialMedia": [
+                {
+                    "platform": "Facebook",
+                    "followers": "12.5K followers",
+                    "link": "https://facebook.com/tohfacreations"
+                },
+                {
+                    "platform": "Instagram",
+                    "followers": "8.2K followers",
+                    "link": "https://instagram.com/tohfacreations"
+                },
+                {
+                    "platform": "Twitter",
+                    "followers": "5.8K followers",
+                    "link": "https://twitter.com/tohfacreations"
+                },
+                {
+                    "platform": "LinkedIn",
+                    "followers": "5.1K followers",
+                    "link": "https://linkedin.com/tohfacreations"
+                }
+            ],
+            "recentPosts": {
+                "title": "Recent Posts",
+                "description": "See what we've been working on lately",
+                "posts": [
+                    {
+                        "platform": "Instagram",
+                        "timeAgo": "2 hours ago",
+                        "content": "Just finished this beautiful custom jewelry box for Sarah's anniversary gift! 🎁",
+                        "image": "/recent-post-1.jpg"
+                    },
+                    {
+                        "platform": "Facebook",
+                        "timeAgo": "1 day ago",
+                        "content": "Behind the scenes: Creating magic one piece at a time in our studio ✨",
+                        "image": "/recent-post-2.jpg"
+                    },
+                    {
+                        "platform": "Instagram",
+                        "timeAgo": "3 days ago",
+                        "content": "Emily's reaction when she received her custom photo album was priceless. 💕",
+                        "image": "/recent-post-3.jpg"
+                    }
+                ]
+            }
+        }
+    },
+    'site-config': {
+        "_instructions": "SISTER: Update your website basic information here.",
+        "_fields": {
+            "siteName": "Your business name",
+            "tagline": "Your business tagline",
+            "description": "Website description for SEO",
+            "logo": "Logo filename in /public folder",
+            "favicon": "Favicon filename in /public folder",
+            "navigation": "Main navigation menu items"
+        },
+        "siteConfig": {
+            "siteName": "The Tohfa Creations",
+            "tagline": "Handcrafted Gifts, Personalized with Love",
+            "description": "Handcrafted with love, personalized with care. Find the perfect gift to celebrate life's most precious moments.",
+            "logo": "/logo.png",
+            "favicon": "/favicon.ico",
+            "seo": {
+                "keywords": "handmade gifts, personalized gifts, custom gifts, anniversary gifts, birthday gifts, wedding gifts, handmade crafts",
+                "author": "The Tohfa Creations"
+            },
+            "navigation": [
+                {
+                    "name": "Home",
+                    "href": "/"
+                },
+                {
+                    "name": "About",
+                    "href": "/about"
+                },
+                {
+                    "name": "Gifts",
+                    "href": "/gifts"
+                },
+                {
+                    "name": "Contact",
+                    "href": "/contact"
+                }
+            ]
+        }
+    },
     'custom-menu': {
         "_instructions": "Create custom menus for special occasions and seasons.",
         "customMenus": [
