@@ -5,8 +5,8 @@ let customMenus = [];
 
 // Templates for different data types
 const templates = {
-    products: {
-        "_instructions": "Add your products here. Only edit the values in the products array below.",
+    'products': {
+        "_instructions": "SISTER: Update your complete product catalog here. All products and featured items in one place!",
         "_fields": {
             "id": "Unique product ID (never change existing IDs)",
             "name": "Product name as shown to customers",
@@ -25,9 +25,92 @@ const templates = {
             "specifications": "Product specifications (material, size, weight, color, etc.)",
             "shipping": "Shipping information (delivery time, packaging, shipping cost, etc.)",
             "careInstructions": "Care and maintenance instructions",
-            "features": "Array of key product features/benefits"
+            "features": "Array of key product features/benefits",
+            "topSelling": "Featured products that appear on homepage"
         },
-        "products": []
+        "topSelling": {
+            "title": "Top Selling Gifts",
+            "description": "Discover our most loved and highly-rated gifts that have brought joy to countless celebrations.",
+            "productIds": ["1", "2", "3", "4", "5", "6", "7", "8"]
+        },
+        "products": [
+            {
+                "id": "1",
+                "name": "Vintage Rose Jewelry Box",
+                "description": "Handcrafted wooden jewelry box with intricate rose patterns and velvet interior.",
+                "price": 7499,
+                "originalPrice": 9999,
+                "images": [
+                    "/vintage-wooden-jewelry-box-with-rose-patterns.jpg",
+                    "/jewelry-box-open-view.jpg",
+                    "/jewelry-box-detail-view.jpg"
+                ],
+                "gif": "",
+                "video": "",
+                "category": "gift-box",
+                "occasion": "anniversary",
+                "rating": 4.8,
+                "reviewCount": 127,
+                "customizationLevel": "premium",
+                "inStock": true,
+                "specifications": {
+                    "material": "Premium wood with velvet lining",
+                    "size": "8\" x 6\" x 3\"",
+                    "weight": "450g",
+                    "color": "Natural wood finish with rose carvings"
+                },
+                "shipping": {
+                    "deliveryTime": "5-7 business days",
+                    "packaging": "Gift-wrapped with ribbon",
+                    "shippingCost": "Free shipping on orders above ₹999"
+                },
+                "careInstructions": "Wipe with dry cloth, keep away from moisture",
+                "features": [
+                    "Handcrafted with premium materials",
+                    "Custom engraving available",
+                    "Velvet interior lining",
+                    "Secure lock mechanism"
+                ]
+            },
+            {
+                "id": "2",
+                "name": "Anniversary Memory Album",
+                "description": "Beautiful leather-bound photo album with custom cover design.",
+                "price": 5499,
+                "originalPrice": 6999,
+                "images": [
+                    "/leather-photo-album-cover.jpg",
+                    "/photo-album-open-view.jpg",
+                    "/photo-album-detail-view.jpg"
+                ],
+                "gif": "",
+                "video": "",
+                "category": "gift-hamper",
+                "occasion": "anniversary",
+                "rating": 4.9,
+                "reviewCount": 89,
+                "customizationLevel": "standard",
+                "inStock": true,
+                "specifications": {
+                    "material": "Premium leather with gold foil",
+                    "size": "12\" x 10\" x 2\"",
+                    "weight": "800g",
+                    "color": "Brown leather with gold accents"
+                },
+                "shipping": {
+                    "deliveryTime": "4-6 business days",
+                    "packaging": "Gift box with tissue paper",
+                    "shippingCost": "Free shipping on orders above ₹999"
+                },
+                "careInstructions": "Store in dry place, handle with clean hands",
+                "features": [
+                    "Custom cover design",
+                    "Acid-free photo pages",
+                    "Gold foil accents",
+                    "Ribbon bookmark included"
+                ]
+            }
+        ]
     },
     'about-values': {
         "_instructions": "Update your about page values and why choose section here.",
@@ -39,19 +122,6 @@ const templates = {
         },
         "whyChoose": [],
         "values": []
-    },
-    'contact-info': {
-        "_instructions": "Update your contact information here.",
-        "_fields": {
-            "title": "Contact section title",
-            "description": "Description for customers",
-            "phone": "Phone number",
-            "email": "Email address",
-            "buttonText": "Button text",
-            "icon": "Lucide icon name (Phone, Gift, Headphones)",
-            "buttonColor": "Button color (purple or green)"
-        },
-        "contactItems": []
     },
     'navigation': {
         "_instructions": "SISTER: Update your website navigation menu here.",
@@ -91,19 +161,21 @@ const templates = {
         "testimonials": []
     },
     'categories': {
-        "_instructions": "SISTER: Update your shop categories here. These appear on the home page.",
+        "_instructions": "SISTER: Update your product categories here. These help organize your products.",
         "_fields": {
+            "id": "Unique category ID (never change existing IDs)",
             "name": "Category name as shown to customers",
             "description": "Category description for customers",
-            "image": "Image filename in /public folder",
-            "href": "Link to filtered products (keep the ?category= part)"
+            "icon": "Lucide icon name (Gift, Heart, Star, Package, etc.)",
+            "image": "Category image filename in /public folder"
         },
         "categories": [
             {
-                "name": "Gift Hamper",
-                "description": "Curated collections of premium items beautifully packaged for the perfect gifting experience.",
-                "image": "/elegant-gift-boxes-with-pink-ribbons-on-white-back.jpg",
-                "href": "/gifts?category=gift-hamper"
+                "id": "gift-hamper",
+                "name": "Gift Hampers",
+                "description": "Curated gift boxes with multiple items for special occasions.",
+                "icon": "Package",
+                "image": "/gift-hampers-category.jpg"
             },
             {
                 "name": "Gift Box",
@@ -188,47 +260,73 @@ const templates = {
         }
     },
     'about': {
-        "_instructions": "SISTER: Update your about page content here.",
+        "_instructions": "SISTER: Update your complete about page content here. Everything about your business in one place!",
         "_fields": {
-            "heroTitle": "Main title of about page",
-            "heroDescription": "Main description under title",
-            "storyTitle": "Our Story section title",
-            "storyContent": "Your business story paragraphs",
-            "missionTitle": "Mission section title",
-            "missionContent": "Your mission statement",
-            "values": "Your business values list"
+            "hero": "About page hero section (title, subtitle, description, button)",
+            "story": "Company story paragraphs", 
+            "mission": "Mission statement",
+            "whyChoose": "Why Choose section items (with icons)",
+            "values": "Company values (with icons)"
         },
         "about": {
-            "heroTitle": "About The Tohfa Creations",
-            "heroDescription": "Handcrafted with love, personalized with care. Creating beautiful memories through unique handmade gifts.",
+            "hero": {
+                "title": "About The Tohfa Creations",
+                "subtitle": "Love & Craftsmanship", 
+                "description": "Founded in 2016, The Tohfa Creations began as a small dream to create meaningful connections through handcrafted artistry. Every piece we create carries the passion and dedication of our skilled artisan team.",
+                "learnJourneyText": "Learn Our Journey"
+            },
             "story": {
                 "title": "Our Story",
-                "content": [
-                    "The Tohfa Creations began as a small dream in my workshop, surrounded by colorful papers, ribbons, and endless possibilities. What started as creating gifts for friends and family quickly grew into a passion for bringing joy to others through personalized, handmade creations.",
-                    "Every piece we create tells a story - your story. We believe that the best gifts are not just objects, but memories captured in tangible form. Whether it's a wedding album, a birthday keepsake, or an anniversary treasure, each item is crafted with attention to detail and filled with love.",
-                    "Over the years, we've had the privilege of being part of countless special moments - proposals, weddings, anniversaries, and celebrations of all kinds. Each commission has taught us something new about the art of gift-giving and the importance of personal touches."
+                "paragraphs": [
+                    "It all started in 2016 when our founder, Sarah Martinez, created a handcrafted memory album for her parents' 40th wedding anniversary. What began as a personal project to capture their love story quickly became something more—a realization that every family has precious moments worth preserving in a beautiful, meaningful way.",
+                    "That first album, filled with carefully selected photos, handwritten notes, and personal touches, moved her parents to tears. Friends and family who saw it began asking Sarah to create similar keepsakes for their own special occasions. Word spread, and what started as a passion project in her small apartment studio grew into The Tohfa Creations.",
+                    "Today, we're a team of skilled artisans dedicated to creating handcrafted gifts that tell your unique story. From anniversary gifts to birthday surprises, proposal setups to memory albums, we pour our hearts into every piece, ensuring it becomes a treasured heirloom that celebrates life's most precious moments."
                 ]
             },
             "mission": {
                 "title": "Our Mission",
                 "content": "To create beautiful, personalized handmade gifts that capture life's most precious moments and bring joy to both giver and receiver. We strive to make every gift a cherished memory that lasts a lifetime."
             },
+            "whyChoose": [
+                {
+                    "icon": "Heart",
+                    "title": "Premium Quality",
+                    "description": "We use only the finest materials and artisanal craftsmanship techniques to ensure every gift is built to last generations.",
+                    "link": "100% Customer Satisfaction"
+                },
+                {
+                    "icon": "HandHeart", 
+                    "title": "Personal Touch",
+                    "description": "Every piece is uniquely crafted to tell your personal story, making each gift as individual as the person receiving it.",
+                    "link": "100% Personalization"
+                },
+                {
+                    "icon": "Clock",
+                    "title": "Timely Delivery", 
+                    "description": "We understand the importance of special moments and guarantee your handcrafted gift will arrive exactly when you need it.",
+                    "link": "On-Time Guarantee"
+                }
+            ],
             "values": [
                 {
-                    "title": "Handcrafted Quality",
-                    "description": "Every piece is meticulously crafted by hand with premium materials and attention to detail."
+                    "icon": "Heart",
+                    "title": "Love in Every Detail",
+                    "description": "We pour genuine care and attention into every aspect of our craft, ensuring each gift carries the love it's meant to express."
                 },
                 {
-                    "title": "Personalization",
-                    "description": "We believe in the power of personal touches and work closely with clients to create unique, meaningful gifts."
+                    "icon": "Leaf",
+                    "title": "Sustainable Practices",
+                    "description": "We are committed to environmental responsibility, using eco-friendly materials and sustainable crafting methods in all our creations."
                 },
                 {
-                    "title": "Sustainability",
-                    "description": "We use eco-friendly materials and sustainable practices whenever possible to protect our planet."
+                    "icon": "Users",
+                    "title": "Community Connection",
+                    "description": "We believe in supporting local artisans and giving back to our community through workshops and charitable partnerships."
                 },
                 {
-                    "title": "Customer Love",
-                    "description": "Your happiness is our priority. We go above and beyond to ensure every gift exceeds expectations."
+                    "icon": "Ribbon",
+                    "title": "Lasting Memories",
+                    "description": "Our mission is to create heirloom-quality gifts that will be treasured for generations, preserving precious memories forever."
                 }
             ]
         }
@@ -241,83 +339,83 @@ const templates = {
             "email": "Your business email",
             "phone": "Your business phone",
             "address": "Your business address",
-            "hours": "Your business hours",
-            "connectWithUs": "Connect With Us section",
-            "socialMedia": "Social media links with follower counts",
-            "recentPosts": "Recent posts section with Instagram/Facebook content"
+            "businessHours": "Business hours information",
+            "socialMedia": "Social media links with redirect links",
+            "recentPosts": "Recent social media posts with redirect links"
         },
         "contact": {
             "title": "Get in Touch",
-            "description": "Have a question or want to discuss a custom gift? We'd love to hear from you!",
+            "description": "We'd love to hear from you! Whether you have a question about our products, want to discuss a custom order, or just want to say hello, we're here for you.",
             "email": "hello@tohfacreations.com",
             "phone": "+91 98765 43210",
-            "address": "123 Craft Street, Artisan Colony, Mumbai, Maharashtra 400001",
-            "hours": {
+            "address": "123 Artisan Lane, Craft District, Mumbai, Maharashtra 400001",
+            "businessHours": {
                 "weekdays": "Monday - Friday: 10:00 AM - 7:00 PM",
-                "saturday": "Saturday: 10:00 AM - 5:00 PM",
+                "saturday": "Saturday: 11:00 AM - 6:00 PM",
                 "sunday": "Sunday: Closed"
-            },
-            "connectWithUs": {
-                "title": "Connect With Us",
-                "description": "Follow us on social media for inspiration, behind-the-scenes content, and special offers."
             },
             "socialMedia": [
                 {
                     "platform": "Facebook",
-                    "followers": "12.5K followers",
                     "link": "https://facebook.com/tohfacreations"
                 },
                 {
-                    "platform": "Instagram",
-                    "followers": "8.2K followers",
+                    "platform": "Instagram", 
                     "link": "https://instagram.com/tohfacreations"
                 },
                 {
                     "platform": "Twitter",
-                    "followers": "5.8K followers",
                     "link": "https://twitter.com/tohfacreations"
-                },
-                {
-                    "platform": "LinkedIn",
-                    "followers": "5.1K followers",
-                    "link": "https://linkedin.com/tohfacreations"
                 }
             ],
-            "recentPosts": {
-                "title": "Recent Posts",
-                "description": "See what we've been working on lately",
-                "posts": [
-                    {
-                        "platform": "Instagram",
-                        "timeAgo": "2 hours ago",
-                        "content": "Just finished this beautiful custom jewelry box for Sarah's anniversary gift! 🎁",
-                        "image": "/recent-post-1.jpg"
-                    },
-                    {
-                        "platform": "Facebook",
-                        "timeAgo": "1 day ago",
-                        "content": "Behind the scenes: Creating magic one piece at a time in our studio ✨",
-                        "image": "/recent-post-2.jpg"
-                    },
+            "recentPosts": [
+                {
+                    "id": "1",
+                    "platform": "Instagram",
+                    "timeAgo": "2 days ago",
+                    "content": "Just completed this beautiful wedding gift box for Sarah & Raj's special day! 💒",
+                    "image": "/recent-post-1.jpg",
+                    "redirectLink": "https://instagram.com/p/ABC123"
+                },
+                {
+                    "id": "2",
+                    "platform": "Facebook",
+                    "timeAgo": "5 days ago",
+                    "content": "Customer love is what drives us! Look at this amazing reaction to our anniversary album. ❤️",
+                    "image": "/recent-post-2.jpg",
+                    "redirectLink": "https://facebook.com/posts/XYZ789"
+                },
+                {
+                    "id": "3",
+                    "platform": "Instagram",
+                    "timeAgo": "3 days ago",
+                    "content": "Emily's reaction when she received her custom photo album was priceless. 💕",
+                    "image": "/recent-post-3.jpg",
+                    "redirectLink": "https://instagram.com/p/DEF789"
+                }
+            ]
                     {
                         "platform": "Instagram",
                         "timeAgo": "3 days ago",
                         "content": "Emily's reaction when she received her custom photo album was priceless. 💕",
-                        "image": "/recent-post-3.jpg"
+                        "image": "/recent-post-3.jpg",
+                        "redirectLink": "https://instagram.com/p/DEF789"
                     }
                 ]
             }
         }
     },
     'site-config': {
-        "_instructions": "SISTER: Update your website basic information here.",
+        "_instructions": "SISTER: Update your complete website configuration here. Everything about your website in one place!",
         "_fields": {
             "siteName": "Your business name",
-            "tagline": "Your business tagline",
+            "tagline": "Your business tagline", 
             "description": "Website description for SEO",
             "logo": "Logo filename in /public folder",
             "favicon": "Favicon filename in /public folder",
-            "navigation": "Main navigation menu items"
+            "hero": "Homepage hero section content",
+            "navigation": "Main navigation menu items",
+            "seo": "SEO settings"
         },
         "siteConfig": {
             "siteName": "The Tohfa Creations",
@@ -325,9 +423,12 @@ const templates = {
             "description": "Handcrafted with love, personalized with care. Find the perfect gift to celebrate life's most precious moments.",
             "logo": "/logo.png",
             "favicon": "/favicon.ico",
-            "seo": {
-                "keywords": "handmade gifts, personalized gifts, custom gifts, anniversary gifts, birthday gifts, wedding gifts, handmade crafts",
-                "author": "The Tohfa Creations"
+            "hero": {
+                "title": "The Tohfa Creations",
+                "subtitle": "One Stop Gifting Solution",
+                "description": "Create unforgettable moments with our bespoke handcrafted gifts. Each piece is artistically designed to tell stories and spread joy to celebrate life's most precious milestones.",
+                "backgroundImage": "/hero.bg.png",
+                "browseGiftsText": "Browse Gifts"
             },
             "navigation": [
                 {
@@ -346,6 +447,89 @@ const templates = {
                     "name": "Contact",
                     "href": "/contact"
                 }
+            ],
+            "seo": {
+                "keywords": "handmade gifts, personalized gifts, custom gifts, anniversary gifts, birthday gifts, wedding gifts, handmade crafts",
+                "author": "The Tohfa Creations"
+            }
+        }
+    },
+    'site-hero': {
+        "_instructions": "SISTER: Update your homepage hero section content here.",
+        "_fields": {
+            "title": "Main hero title",
+            "subtitle": "Hero subtitle/tagline",
+            "description": "Hero description text",
+            "backgroundImage": "Background image filename",
+            "browseGiftsText": "Browse Gifts button text"
+        },
+        "hero": {
+            "title": "The Tohfa Creations",
+            "subtitle": "One Stop Gifting Solution",
+            "description": "Create unforgettable moments with our bespoke handcrafted gifts. Each piece is artistically designed to tell stories and spread joy to celebrate life's most precious milestones.",
+            "backgroundImage": "/hero.bg.png",
+            "browseGiftsText": "Browse Gifts"
+        }
+    },
+    'footer': {
+        "_instructions": "SISTER: Update your website footer content here.",
+        "_fields": {
+            "companyName": "Company name",
+            "companyDescription": "Company description",
+            "quickLinksTitle": "Quick Links section title",
+            "contactInfoTitle": "Contact Info section title",
+            "followUsTitle": "Follow Us section title",
+            "socialMedia": "Social media links",
+            "copyright": "Copyright text"
+        },
+        "footer": {
+            "companyName": "The Tohfa Creations",
+            "companyDescription": "Creating meaningful connections through handcrafted gifts and personalized experiences.",
+            "quickLinksTitle": "Quick Links",
+            "contactInfoTitle": "Contact Info",
+            "followUsTitle": "Follow Us",
+            "socialMedia": [
+                {
+                    "platform": "Facebook",
+                    "link": "https://facebook.com/tohfacreations"
+                },
+                {
+                    "platform": "Instagram", 
+                    "link": "https://instagram.com/tohfacreations"
+                },
+                {
+                    "platform": "Twitter",
+                    "link": "https://twitter.com/tohfacreations"
+                }
+            ],
+            "copyright": "&copy; 2025 The Tohfa Creations. All rights reserved."
+        }
+    },
+    'about-hero': {
+        "_instructions": "SISTER: Update your about page hero section content here.",
+        "_fields": {
+            "title": "About page hero title",
+            "subtitle": "Hero subtitle/highlight",
+            "description": "Hero description text",
+            "learnJourneyText": "Learn Our Journey button text"
+        },
+        "hero": {
+            "title": "About The Tohfa Creations",
+            "subtitle": "Love & Craftsmanship",
+            "description": "Founded in 2016, The Tohfa Creations began as a small dream to create meaningful connections through handcrafted artistry. Every piece we create carries the passion and dedication of our skilled artisan team.",
+            "learnJourneyText": "Learn Our Journey"
+        }
+    },
+    'about-story': {
+        "_instructions": "SISTER: Update your about page story content here.",
+        "_fields": {
+            "story": "Company story paragraphs"
+        },
+        "story": {
+            "paragraphs": [
+                "It all started in 2016 when our founder, Sarah Martinez, created a handcrafted memory album for her parents' 40th wedding anniversary. What began as a personal project to capture their love story quickly became something more—a realization that every family has precious moments worth preserving in a beautiful, meaningful way.",
+                "That first album, filled with carefully selected photos, handwritten notes, and personal touches, moved her parents to tears. Friends and family who saw it began asking Sarah to create similar keepsakes for their own special occasions. Word spread, and what started as a passion project in her small apartment studio grew into The Tohfa Creations.",
+                "Today, we're a team of skilled artisans dedicated to creating handcrafted gifts that tell your unique story. From anniversary gifts to birthday surprises, proposal setups to memory albums, we pour our hearts into every piece, ensuring it becomes a treasured heirloom that celebrates life's most precious moments."
             ]
         }
     },
@@ -354,21 +538,21 @@ const templates = {
         "customMenus": [
             {
                 "id": "special-occasions",
-                "name": "🎨 Special occasions",
+                "name": "",
                 "description": "Special occasion menus and collections",
                 "items": [],
                 "isActive": true
             },
             {
                 "id": "seasonal",
-                "name": "🎂 Seasonal menus",
+                "name": "",
                 "description": "Seasonal collections and limited edition items",
                 "items": [],
                 "isActive": true
             },
             {
                 "id": "custom",
-                "name": "💝 Custom content",
+                "name": "",
                 "description": "Custom collections and personalized content",
                 "items": [],
                 "isActive": true
