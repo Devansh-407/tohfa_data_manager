@@ -494,8 +494,14 @@ const templates = {
         }
     },
     categories: {
-        "_instructions": "Manage your product categories here.",
-        "categories": []
+        "categories": [
+            {
+                "name": "Gift Hamper",
+                "description": "Curated collections of premium items beautifully packaged for the perfect gifting experience.",
+                "image": "/elegant-gift-boxes-with-pink-ribbons-on-white-back.jpg",
+                "href": "/gifts?category=gift-hamper"
+            }
+        ]
     },
     contact: {
         "_instructions": "SISTER: Update your contact page information here.",
