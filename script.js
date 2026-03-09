@@ -118,12 +118,29 @@ const formFields = {
         description: 'Manage your contact details',
         fields: [
             { name: 'contact.title', type: 'text', label: 'Contact Page Title', example: 'Contact Us' },
-            { name: 'contact.description', type: 'textarea', label: 'Contact Page Description', example: 'Get in touch with us for any questions about our handcrafted gifts.' },
-            { name: 'contact.phone', type: 'text', label: 'Phone Number', example: '+91 6396202262' },
-            { name: 'contact.available', type: 'text', label: 'Available Hours', example: 'Available 24/7' },
-            { name: 'contact.email', type: 'text', label: 'Email Address', example: 'tohfacreations3@gmail.com' },
-            { name: 'contact.responseTime', type: 'text', label: 'Response Time', example: 'We respond within 24 hours' },
-            { name: 'contact.address', type: 'textarea', label: 'Business Address', example: '28/476, Gokula Gali Gudri Mansoor Khan, Dhuliya Ganj, Agra-282003, Uttar Pradesh' }
+            { name: 'contact.description', type: 'textarea', label: 'Contact Page Description', example: 'Have a question or want to discuss a custom gift? We\'d love to hear from you!' },
+            { name: 'contact.phone', type: 'text', label: 'Phone Number', example: '+91 98765 43210' },
+            { name: 'contact.address', type: 'textarea', label: 'Business Address', example: '123 Craft Street, Artisan Colony, Mumbai, Maharashtra 400001' },
+            { name: 'contact.email', type: 'text', label: 'Email Address', example: 'hello@tohfacreations.com' },
+            { name: 'contact.hours.weekdays', type: 'text', label: 'Weekday Hours', example: 'Monday - Friday: 10:00 AM - 7:00 PM' },
+            { name: 'contact.hours.saturday', type: 'text', label: 'Saturday Hours', example: 'Saturday: 10:00 AM - 5:00 PM' },
+            { name: 'contact.hours.sunday', type: 'text', label: 'Sunday Hours', example: 'Sunday: Closed' },
+            { name: 'contact.connectWithUs.title', type: 'text', label: 'Connect With Us Title', example: 'Connect With Us' },
+            { name: 'contact.connectWithUs.description', type: 'textarea', label: 'Connect With Us Description', example: 'Follow us on social media for inspiration, behind-the-scenes content, and special offers.' },
+            { name: 'contact.socialMedia', type: 'array', label: 'Social Media Links', itemFields: [
+                { name: 'platform', type: 'text', label: 'Platform Name', example: 'Facebook' },
+                { name: 'followers', type: 'text', label: 'Followers Count', example: '12.5K followers' },
+                { name: 'link', type: 'text', label: 'Social Media Link', example: 'https://facebook.com/tohfacreations' }
+            ]},
+            { name: 'contact.recentPosts.title', type: 'text', label: 'Recent Posts Title', example: 'Recent Posts' },
+            { name: 'contact.recentPosts.description', type: 'textarea', label: 'Recent Posts Description', example: 'See what we\'ve been working on lately' },
+            { name: 'contact.recentPosts', type: 'array', label: 'Recent Posts', itemFields: [
+                { name: 'platform', type: 'text', label: 'Platform', example: 'Instagram' },
+                { name: 'timeAgo', type: 'text', label: 'Time Ago', example: '2 hours ago' },
+                { name: 'content', type: 'textarea', label: 'Post Content', example: 'Just finished this beautiful custom jewelry box for Sarah\'s anniversary gift! 🎁' },
+                { name: 'image', type: 'text', label: 'Post Image', example: '/recent-post-1.jpg' },
+                { name: 'redirectLink', type: 'text', label: 'Post Link', example: 'https://instagram.com/p/XYZ123' }
+            ]}
         ]
     },
     'site-config': {
@@ -682,19 +699,6 @@ const templates = {
         },
         "contact": {
             "title": "Contact Us",
-            "description": "Get in touch with us for any questions about our handcrafted gifts.",
-            "phone": "+91 6396202262",
-            "available": "Available 24/7",
-            "email": "tohfacreations3@gmail.com",
-            "responseTime": "We respond within 24 hours",
-            "address": "28/476, Gokula Gali Gudri Mansoor Khan, Dhuliya Ganj, Agra-282003, Uttar Pradesh",
-            "lookingForSomething": {
-                "title": "Looking for something specific?",
-                "links": [
-                    {"text": "Browse Gifts", "href": "/gifts"},
-                    {"text": "About Us", "href": "/about"},
-                    {"text": "My Account", "href": "/account"}
-                ]
             },
             "connectWithUs": {
                 "title": "Connect With Us",
@@ -729,20 +733,23 @@ const templates = {
                     {
                         "platform": "Instagram",
                         "timeAgo": "2 hours ago",
-                        "content": "Just finished this beautiful custom jewelry box for Sarah's anniversary gift! 🎁",
-                        "image": "/recent-post-1.jpg"
+                        "content": "Just finished this beautiful custom jewelry box for Sarah's anniversary gift! ",
+                        "image": "/recent-post-1.jpg",
+                        "redirectLink": "https://instagram.com/p/XYZ123"
                     },
                     {
                         "platform": "Facebook",
                         "timeAgo": "1 day ago", 
-                        "content": "Behind the scenes: Creating magic one piece at a time in our studio ✨",
-                        "image": "/recent-post-2.jpg"
+                        "content": "Behind the scenes: Creating magic one piece at a time in our studio ",
+                        "image": "/recent-post-2.jpg",
+                        "redirectLink": "https://facebook.com/tohfacreations/posts/ABC456"
                     },
                     {
                         "platform": "Instagram",
                         "timeAgo": "3 days ago",
-                        "content": "Emily's reaction when she received her custom photo album was priceless. 💕",
-                        "image": "/recent-post-3.jpg"
+                        "content": "Emily's reaction when she received her custom photo album was priceless. ",
+                        "image": "/recent-post-3.jpg",
+                        "redirectLink": "https://instagram.com/p/DEF789"
                     }
                 ]
             }
@@ -1683,39 +1690,44 @@ function generateJSONFromForm() {
         }
     });
     
-    // Handle special case for site-config to match exact structure
-    if (currentFormManager === 'site-config') {
-        const siteConfig = {};
+    // Handle special case for contact to match exact structure
+    if (currentFormManager === 'contact') {
+        const contact = {};
         
         // Simple fields
-        if (result['siteConfig.siteName']) siteConfig.siteName = result['siteConfig.siteName'];
-        if (result['siteConfig.tagline']) siteConfig.tagline = result['siteConfig.tagline'];
-        if (result['siteConfig.description']) siteConfig.description = result['siteConfig.description'];
-        if (result['siteConfig.logo']) siteConfig.logo = result['siteConfig.logo'];
-        if (result['siteConfig.favicon']) siteConfig.favicon = result['siteConfig.favicon'];
+        if (result['contact.title']) contact.title = result['contact.title'];
+        if (result['contact.description']) contact.description = result['contact.description'];
+        if (result['contact.phone']) contact.phone = result['contact.phone'];
+        if (result['contact.address']) contact.address = result['contact.address'];
+        if (result['contact.email']) contact.email = result['contact.email'];
         
-        // Hero section
-        if (result['siteConfig.hero.title'] || result['siteConfig.hero.subtitle'] || result['siteConfig.hero.description'] || 
-            result['siteConfig.hero.backgroundImage'] || result['siteConfig.hero.browseGiftsText']) {
-            siteConfig.hero = {};
-            if (result['siteConfig.hero.title']) siteConfig.hero.title = result['siteConfig.hero.title'];
-            if (result['siteConfig.hero.subtitle']) siteConfig.hero.subtitle = result['siteConfig.hero.subtitle'];
-            if (result['siteConfig.hero.description']) siteConfig.hero.description = result['siteConfig.hero.description'];
-            if (result['siteConfig.hero.backgroundImage']) siteConfig.hero.backgroundImage = result['siteConfig.hero.backgroundImage'];
-            if (result['siteConfig.hero.browseGiftsText']) siteConfig.hero.browseGiftsText = result['siteConfig.hero.browseGiftsText'];
+        // Hours object
+        if (result['contact.hours.weekdays'] || result['contact.hours.saturday'] || result['contact.hours.sunday']) {
+            contact.hours = {};
+            if (result['contact.hours.weekdays']) contact.hours.weekdays = result['contact.hours.weekdays'];
+            if (result['contact.hours.saturday']) contact.hours.saturday = result['contact.hours.saturday'];
+            if (result['contact.hours.sunday']) contact.hours.sunday = result['contact.hours.sunday'];
         }
         
-        // Navigation array
-        if (result['siteConfig.navigation']) siteConfig.navigation = result['siteConfig.navigation'];
-        
-        // SEO section
-        if (result['siteConfig.seo.keywords'] || result['siteConfig.seo.author']) {
-            siteConfig.seo = {};
-            if (result['siteConfig.seo.keywords']) siteConfig.seo.keywords = result['siteConfig.seo.keywords'];
-            if (result['siteConfig.seo.author']) siteConfig.seo.author = result['siteConfig.seo.author'];
+        // Connect With Us object
+        if (result['contact.connectWithUs.title'] || result['contact.connectWithUs.description']) {
+            contact.connectWithUs = {};
+            if (result['contact.connectWithUs.title']) contact.connectWithUs.title = result['contact.connectWithUs.title'];
+            if (result['contact.connectWithUs.description']) contact.connectWithUs.description = result['contact.connectWithUs.description'];
         }
         
-        result.siteConfig = siteConfig;
+        // Social Media array
+        if (result['contact.socialMedia']) contact.socialMedia = result['contact.socialMedia'];
+        
+        // Recent Posts object
+        if (result['contact.recentPosts.title'] || result['contact.recentPosts.description'] || result['contact.recentPosts']) {
+            contact.recentPosts = {};
+            if (result['contact.recentPosts.title']) contact.recentPosts.title = result['contact.recentPosts.title'];
+            if (result['contact.recentPosts.description']) contact.recentPosts.description = result['contact.recentPosts.description'];
+            if (result['contact.recentPosts']) contact.recentPosts.posts = result['contact.recentPosts'];
+        }
+        
+        result.contact = contact;
     }
     
     const jsonOutput = document.getElementById('jsonOutput');
