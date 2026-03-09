@@ -131,9 +131,21 @@ const formFields = {
         description: 'Manage website settings',
         fields: [
             { name: 'siteConfig.siteName', type: 'text', label: 'Site Name', example: 'The Tohfa Creations' },
-            { name: 'siteConfig.siteUrl', type: 'text', label: 'Site URL', example: 'https://tohfacreations.com' },
+            { name: 'siteConfig.tagline', type: 'text', label: 'Tagline', example: 'Handcrafted Gifts, Personalized with Love' },
+            { name: 'siteConfig.description', type: 'textarea', label: 'Description', example: 'Handcrafted with love, personalized with care. Find the perfect gift to celebrate life\'s most precious moments.' },
             { name: 'siteConfig.logo', type: 'text', label: 'Logo URL', example: '/logo.png' },
-            { name: 'siteConfig.favicon', type: 'text', label: 'Favicon URL', example: '/favicon.ico' }
+            { name: 'siteConfig.favicon', type: 'text', label: 'Favicon URL', example: '/favicon.ico' },
+            { name: 'siteConfig.hero.title', type: 'text', label: 'Hero Title', example: 'The Tohfa Creations' },
+            { name: 'siteConfig.hero.subtitle', type: 'text', label: 'Hero Subtitle', example: 'One Stop Gifting Solution' },
+            { name: 'siteConfig.hero.description', type: 'textarea', label: 'Hero Description', example: 'Create unforgettable moments with our bespoke handcrafted gifts. Each piece is artistically designed to tell stories and spread joy to celebrate life\'s most precious milestones.' },
+            { name: 'siteConfig.hero.backgroundImage', type: 'text', label: 'Hero Background Image', example: '/hero.bg.png' },
+            { name: 'siteConfig.hero.browseGiftsText', type: 'text', label: 'Browse Gifts Text', example: 'Browse Gifts' },
+            { name: 'siteConfig.navigation', type: 'array', label: 'Navigation Items', itemFields: [
+                { name: 'name', type: 'text', label: 'Menu Item Name', example: 'Home' },
+                { name: 'href', type: 'text', label: 'Link URL', example: '/' }
+            ]},
+            { name: 'siteConfig.seo.keywords', type: 'text', label: 'SEO Keywords', example: 'handmade gifts, personalized gifts, custom gifts, anniversary gifts, birthday gifts, wedding gifts, handmade crafts' },
+            { name: 'siteConfig.seo.author', type: 'text', label: 'SEO Author', example: 'The Tohfa Creations' }
         ]
     },
     'custom-menu': {
@@ -438,17 +450,6 @@ const templates = {
         }
     },
     'site-config': {
-        "_instructions": "SISTER: Update your complete website configuration here. Everything about your website in one place!",
-        "_fields": {
-            "siteName": "Your business name",
-            "tagline": "Your business tagline", 
-            "description": "Website description for SEO",
-            "logo": "Logo filename in /public folder",
-            "favicon": "Favicon filename in /public folder",
-            "hero": "Homepage hero section content",
-            "navigation": "Main navigation menu items",
-            "seo": "SEO settings"
-        },
         "siteConfig": {
             "siteName": "The Tohfa Creations",
             "tagline": "Handcrafted Gifts, Personalized with Love",
@@ -1681,6 +1682,41 @@ function generateJSONFromForm() {
             result[field.name] = getFieldValue(field.name);
         }
     });
+    
+    // Handle special case for site-config to match exact structure
+    if (currentFormManager === 'site-config') {
+        const siteConfig = {};
+        
+        // Simple fields
+        if (result['siteConfig.siteName']) siteConfig.siteName = result['siteConfig.siteName'];
+        if (result['siteConfig.tagline']) siteConfig.tagline = result['siteConfig.tagline'];
+        if (result['siteConfig.description']) siteConfig.description = result['siteConfig.description'];
+        if (result['siteConfig.logo']) siteConfig.logo = result['siteConfig.logo'];
+        if (result['siteConfig.favicon']) siteConfig.favicon = result['siteConfig.favicon'];
+        
+        // Hero section
+        if (result['siteConfig.hero.title'] || result['siteConfig.hero.subtitle'] || result['siteConfig.hero.description'] || 
+            result['siteConfig.hero.backgroundImage'] || result['siteConfig.hero.browseGiftsText']) {
+            siteConfig.hero = {};
+            if (result['siteConfig.hero.title']) siteConfig.hero.title = result['siteConfig.hero.title'];
+            if (result['siteConfig.hero.subtitle']) siteConfig.hero.subtitle = result['siteConfig.hero.subtitle'];
+            if (result['siteConfig.hero.description']) siteConfig.hero.description = result['siteConfig.hero.description'];
+            if (result['siteConfig.hero.backgroundImage']) siteConfig.hero.backgroundImage = result['siteConfig.hero.backgroundImage'];
+            if (result['siteConfig.hero.browseGiftsText']) siteConfig.hero.browseGiftsText = result['siteConfig.hero.browseGiftsText'];
+        }
+        
+        // Navigation array
+        if (result['siteConfig.navigation']) siteConfig.navigation = result['siteConfig.navigation'];
+        
+        // SEO section
+        if (result['siteConfig.seo.keywords'] || result['siteConfig.seo.author']) {
+            siteConfig.seo = {};
+            if (result['siteConfig.seo.keywords']) siteConfig.seo.keywords = result['siteConfig.seo.keywords'];
+            if (result['siteConfig.seo.author']) siteConfig.seo.author = result['siteConfig.seo.author'];
+        }
+        
+        result.siteConfig = siteConfig;
+    }
     
     const jsonOutput = document.getElementById('jsonOutput');
     jsonOutput.value = JSON.stringify(result, null, 2);
