@@ -6,27 +6,6 @@ let customMenus = [];
 // Templates for different data types - only the 8 files that actually exist
 const templates = {
     'products': {
-        "_instructions": "SISTER: Update your complete product catalog here. All products and featured items in one place!",
-        "_fields": {
-            "id": "Unique product ID (never change existing IDs)",
-            "name": "Product name as shown to customers",
-            "description": "Product description for customers",
-            "price": "Price in numbers (e.g., 7499 for ₹7,499)",
-            "originalPrice": "Original price before discount (optional)",
-            "images": "Array of product images (main image first, then additional views)",
-            "gif": "Product GIF URL (optional, for animated product preview)",
-            "video": "Product video URL (optional, for detailed product showcase)",
-            "category": "Product category: gift-hamper, gift-box, bouquet, miniature, frame",
-            "occasion": "Occasion: anniversary, birthday, proposal, wedding, graduation",
-            "rating": "Rating from 1-5 (e.g., 4.8)",
-            "reviewCount": "Number of reviews (e.g., 127)",
-            "customizationLevel": "basic, standard, or premium",
-            "inStock": "true or false - whether product is available",
-            "specifications": "Product specifications (material, size, weight, color, etc.)",
-            "shipping": "Shipping information (delivery time, packaging, shipping cost, etc.)",
-            "careInstructions": "Care and maintenance instructions",
-            "features": "Array of key product features/benefits"
-        },
         "topSelling": {
             "title": "Top Selling Gifts",
             "description": "Discover our most loved and highly-rated gifts that have brought joy to countless celebrations.",
@@ -932,27 +911,6 @@ function getSimpleManagerHTML(type) {
 function getExampleData(type) {
     const examples = {
         products: {
-            "_instructions": "SISTER: Update your complete product catalog here. All products and featured items in one place!",
-            "_fields": {
-                "id": "Unique product ID (never change existing IDs)",
-                "name": "Product name as shown to customers",
-                "description": "Product description for customers",
-                "price": "Price in numbers (e.g., 7499 for ₹7,499)",
-                "originalPrice": "Original price before discount (optional)",
-                "images": "Array of product images (main image first, then additional views)",
-                "gif": "Product GIF URL (optional, for animated product preview)",
-                "video": "Product video URL (optional, for detailed product showcase)",
-                "category": "Product category: gift-hamper, gift-box, bouquet, miniature, frame",
-                "occasion": "Occasion: anniversary, birthday, proposal, wedding, graduation",
-                "rating": "Rating from 1-5 (e.g., 4.8)",
-                "reviewCount": "Number of reviews (e.g., 127)",
-                "customizationLevel": "basic, standard, or premium",
-                "inStock": "true or false - whether product is available",
-                "specifications": "Product specifications (material, size, weight, color, etc.)",
-                "shipping": "Shipping information (delivery time, packaging, shipping cost, etc.)",
-                "careInstructions": "Care and maintenance instructions",
-                "features": "Array of key product features/benefits"
-            },
             "topSelling": {
                 "title": "Top Selling Gifts",
                 "description": "Discover our most loved and highly-rated gifts that have brought joy to countless celebrations.",
