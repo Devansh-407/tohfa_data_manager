@@ -25,8 +25,7 @@ const templates = {
             "specifications": "Product specifications (material, size, weight, color, etc.)",
             "shipping": "Shipping information (delivery time, packaging, shipping cost, etc.)",
             "careInstructions": "Care and maintenance instructions",
-            "features": "Array of key product features/benefits",
-            "topSelling": "Featured products that appear on homepage"
+            "features": "Array of key product features/benefits"
         },
         "topSelling": {
             "title": "Top Selling Gifts",
@@ -42,8 +41,8 @@ const templates = {
                 "originalPrice": 9999,
                 "images": [
                     "/vintage-wooden-jewelry-box-with-rose-patterns.jpg",
-                    "/jewelry-box-open-view.jpg",
-                    "/jewelry-box-detail-view.jpg"
+                    "/vintage-wooden-jewelry-box-side-view.jpg",
+                    "/vintage-wooden-jewelry-box-open-view.jpg"
                 ],
                 "gif": "",
                 "video": "",
@@ -54,60 +53,24 @@ const templates = {
                 "customizationLevel": "premium",
                 "inStock": true,
                 "specifications": {
-                    "material": "Premium wood with velvet lining",
-                    "size": "8\" x 6\" x 3\"",
-                    "weight": "450g",
-                    "color": "Natural wood finish with rose carvings"
+                    "material": "Premium Wood with Velvet Interior",
+                    "size": "8 x 6 x 4 inches",
+                    "weight": "500 grams",
+                    "color": "Natural Wood Finish with Red Roses"
                 },
                 "shipping": {
-                    "deliveryTime": "5-7 business days",
-                    "packaging": "Gift-wrapped with ribbon",
-                    "shippingCost": "Free shipping on orders above ₹999"
+                    "delivery": "5-7 business days",
+                    "packaging": "Premium gift box included",
+                    "shippingCost": "Free shipping above ₹999"
                 },
-                "careInstructions": "Wipe with dry cloth, keep away from moisture",
+                "careInstructions": "Wipe with dry cloth only. Keep away from direct sunlight and moisture. Use wood polish occasionally to maintain shine.",
                 "features": [
-                    "Handcrafted with premium materials",
-                    "Custom engraving available",
-                    "Velvet interior lining",
-                    "Secure lock mechanism"
-                ]
-            },
-            {
-                "id": "2",
-                "name": "Anniversary Memory Album",
-                "description": "Beautiful leather-bound photo album with custom cover design.",
-                "price": 5499,
-                "originalPrice": 6999,
-                "images": [
-                    "/leather-photo-album-cover.jpg",
-                    "/photo-album-open-view.jpg",
-                    "/photo-album-detail-view.jpg"
-                ],
-                "gif": "",
-                "video": "",
-                "category": "gift-hamper",
-                "occasion": "anniversary",
-                "rating": 4.9,
-                "reviewCount": 89,
-                "customizationLevel": "standard",
-                "inStock": true,
-                "specifications": {
-                    "material": "Premium leather with gold foil",
-                    "size": "12\" x 10\" x 2\"",
-                    "weight": "800g",
-                    "color": "Brown leather with gold accents"
-                },
-                "shipping": {
-                    "deliveryTime": "4-6 business days",
-                    "packaging": "Gift box with tissue paper",
-                    "shippingCost": "Free shipping on orders above ₹999"
-                },
-                "careInstructions": "Store in dry place, handle with clean hands",
-                "features": [
-                    "Custom cover design",
-                    "Acid-free photo pages",
-                    "Gold foil accents",
-                    "Ribbon bookmark included"
+                    "Handcrafted by skilled artisans",
+                    "Intricate rose pattern carving",
+                    "Soft velvet interior lining",
+                    "Brass hinges and clasp",
+                    "Personalization available",
+                    "Gift wrapping included"
                 ]
             }
         ]
@@ -968,6 +931,76 @@ function getSimpleManagerHTML(type) {
 
 function getExampleData(type) {
     const examples = {
+        products: {
+            "_instructions": "SISTER: Update your complete product catalog here. All products and featured items in one place!",
+            "_fields": {
+                "id": "Unique product ID (never change existing IDs)",
+                "name": "Product name as shown to customers",
+                "description": "Product description for customers",
+                "price": "Price in numbers (e.g., 7499 for ₹7,499)",
+                "originalPrice": "Original price before discount (optional)",
+                "images": "Array of product images (main image first, then additional views)",
+                "gif": "Product GIF URL (optional, for animated product preview)",
+                "video": "Product video URL (optional, for detailed product showcase)",
+                "category": "Product category: gift-hamper, gift-box, bouquet, miniature, frame",
+                "occasion": "Occasion: anniversary, birthday, proposal, wedding, graduation",
+                "rating": "Rating from 1-5 (e.g., 4.8)",
+                "reviewCount": "Number of reviews (e.g., 127)",
+                "customizationLevel": "basic, standard, or premium",
+                "inStock": "true or false - whether product is available",
+                "specifications": "Product specifications (material, size, weight, color, etc.)",
+                "shipping": "Shipping information (delivery time, packaging, shipping cost, etc.)",
+                "careInstructions": "Care and maintenance instructions",
+                "features": "Array of key product features/benefits"
+            },
+            "topSelling": {
+                "title": "Top Selling Gifts",
+                "description": "Discover our most loved and highly-rated gifts that have brought joy to countless celebrations.",
+                "productIds": ["1", "2", "3", "4", "5", "6", "7", "8"]
+            },
+            "products": [
+                {
+                    "id": "1",
+                    "name": "Vintage Rose Jewelry Box",
+                    "description": "Handcrafted wooden jewelry box with intricate rose patterns and velvet interior.",
+                    "price": 7499,
+                    "originalPrice": 9999,
+                    "images": [
+                        "/vintage-wooden-jewelry-box-with-rose-patterns.jpg",
+                        "/vintage-wooden-jewelry-box-side-view.jpg",
+                        "/vintage-wooden-jewelry-box-open-view.jpg"
+                    ],
+                    "gif": "",
+                    "video": "",
+                    "category": "gift-box",
+                    "occasion": "anniversary",
+                    "rating": 4.8,
+                    "reviewCount": 127,
+                    "customizationLevel": "premium",
+                    "inStock": true,
+                    "specifications": {
+                        "material": "Premium Wood with Velvet Interior",
+                        "size": "8 x 6 x 4 inches",
+                        "weight": "500 grams",
+                        "color": "Natural Wood Finish with Red Roses"
+                    },
+                    "shipping": {
+                        "delivery": "5-7 business days",
+                        "packaging": "Premium gift box included",
+                        "shippingCost": "Free shipping above ₹999"
+                    },
+                    "careInstructions": "Wipe with dry cloth only. Keep away from direct sunlight and moisture. Use wood polish occasionally to maintain shine.",
+                    "features": [
+                        "Handcrafted by skilled artisans",
+                        "Intricate rose pattern carving",
+                        "Soft velvet interior lining",
+                        "Brass hinges and clasp",
+                        "Personalization available",
+                        "Gift wrapping included"
+                    ]
+                }
+            ]
+        },
         about: {
             "about": {
                 "title": "About The Tohfa Creations",
