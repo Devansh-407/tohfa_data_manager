@@ -699,7 +699,6 @@ const templates = {
         },
         "contact": {
             "title": "Contact Us",
-            },
             "connectWithUs": {
                 "title": "Connect With Us",
                 "description": "Follow us on social media for inspiration, behind-the-scenes content, and special offers."
