@@ -57,6 +57,13 @@ body {
     color: #333;
 }
 
+.field-example {
+    font-weight: normal;
+    color: #667eea;
+    font-size: 0.9rem;
+    margin-left: 5px;
+}
+
 .form-group input,
 .form-group textarea,
 .form-group select {

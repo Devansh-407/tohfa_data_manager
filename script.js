@@ -11,8 +11,8 @@ const formFields = {
         description: 'Manage your website navigation menu',
         fields: [
             { name: 'navItems', type: 'array', label: 'Navigation Items', itemFields: [
-                { name: 'name', type: 'text', label: 'Menu Item Name' },
-                { name: 'href', type: 'text', label: 'Link URL' }
+                { name: 'name', type: 'text', label: 'Menu Item Name', example: 'Home' },
+                { name: 'href', type: 'text', label: 'Link URL', example: '/' }
             ]}
         ]
     },
@@ -20,33 +20,33 @@ const formFields = {
         title: 'Products',
         description: 'Manage your complete product catalog',
         fields: [
-            { name: 'topSelling.title', type: 'text', label: 'Top Selling Title' },
-            { name: 'topSelling.description', type: 'textarea', label: 'Top Selling Description' },
-            { name: 'topSelling.productIds', type: 'text', label: 'Top Selling Product IDs (comma separated)' },
+            { name: 'topSelling.title', type: 'text', label: 'Top Selling Title', example: 'Top Selling Gifts' },
+            { name: 'topSelling.description', type: 'textarea', label: 'Top Selling Description', example: 'Discover our most loved and highly-rated gifts that have brought joy to countless celebrations.' },
+            { name: 'topSelling.productIds', type: 'text', label: 'Top Selling Product IDs (comma separated)', example: '1, 2, 3, 4, 5, 6, 7, 8' },
             { name: 'products', type: 'array', label: 'Products', itemFields: [
-                { name: 'id', type: 'text', label: 'Product ID' },
-                { name: 'name', type: 'text', label: 'Product Name' },
-                { name: 'description', type: 'textarea', label: 'Description' },
-                { name: 'price', type: 'number', label: 'Price (₹)' },
-                { name: 'originalPrice', type: 'number', label: 'Original Price (₹)' },
-                { name: 'images', type: 'text', label: 'Images (comma separated)' },
-                { name: 'gif', type: 'text', label: 'GIF URL' },
-                { name: 'video', type: 'text', label: 'Video URL' },
-                { name: 'category', type: 'select', label: 'Category', options: ['gift-hamper', 'gift-box', 'bouquet', 'miniature', 'frame'] },
-                { name: 'occasion', type: 'select', label: 'Occasion', options: ['anniversary', 'birthday', 'proposal', 'wedding', 'graduation'] },
-                { name: 'rating', type: 'number', label: 'Rating (1-5)' },
-                { name: 'reviewCount', type: 'number', label: 'Review Count' },
-                { name: 'customizationLevel', type: 'select', label: 'Customization Level', options: ['basic', 'standard', 'premium'] },
-                { name: 'inStock', type: 'checkbox', label: 'In Stock' },
-                { name: 'specifications.material', type: 'text', label: 'Material' },
-                { name: 'specifications.size', type: 'text', label: 'Size' },
-                { name: 'specifications.weight', type: 'text', label: 'Weight' },
-                { name: 'specifications.color', type: 'text', label: 'Color' },
-                { name: 'shipping.delivery', type: 'text', label: 'Delivery Time' },
-                { name: 'shipping.packaging', type: 'text', label: 'Packaging' },
-                { name: 'shipping.shippingCost', type: 'text', label: 'Shipping Cost' },
-                { name: 'careInstructions', type: 'textarea', label: 'Care Instructions' },
-                { name: 'features', type: 'text', label: 'Features (comma separated)' }
+                { name: 'id', type: 'text', label: 'Product ID', example: '1' },
+                { name: 'name', type: 'text', label: 'Product Name', example: 'Vintage Rose Jewelry Box' },
+                { name: 'description', type: 'textarea', label: 'Description', example: 'Handcrafted wooden jewelry box with intricate rose patterns and velvet interior.' },
+                { name: 'price', type: 'number', label: 'Price (₹)', example: '7499' },
+                { name: 'originalPrice', type: 'number', label: 'Original Price (₹)', example: '9999' },
+                { name: 'images', type: 'text', label: 'Images (comma separated)', example: '/vintage-wooden-jewelry-box-with-rose-patterns.jpg, /vintage-wooden-jewelry-box-side-view.jpg, /vintage-wooden-jewelry-box-open-view.jpg' },
+                { name: 'gif', type: 'text', label: 'GIF URL', example: '' },
+                { name: 'video', type: 'text', label: 'Video URL', example: '' },
+                { name: 'category', type: 'select', label: 'Category', options: ['gift-hamper', 'gift-box', 'bouquet', 'miniature', 'frame'], example: 'gift-box' },
+                { name: 'occasion', type: 'select', label: 'Occasion', options: ['anniversary', 'birthday', 'proposal', 'wedding', 'graduation'], example: 'anniversary' },
+                { name: 'rating', type: 'number', label: 'Rating (1-5)', example: '4.8' },
+                { name: 'reviewCount', type: 'number', label: 'Review Count', example: '127' },
+                { name: 'customizationLevel', type: 'select', label: 'Customization Level', options: ['basic', 'standard', 'premium'], example: 'premium' },
+                { name: 'inStock', type: 'checkbox', label: 'In Stock', example: 'true' },
+                { name: 'specifications.material', type: 'text', label: 'Material', example: 'Premium Wood with Velvet Interior' },
+                { name: 'specifications.size', type: 'text', label: 'Size', example: '8 x 6 x 4 inches' },
+                { name: 'specifications.weight', type: 'text', label: 'Weight', example: '500 grams' },
+                { name: 'specifications.color', type: 'text', label: 'Color', example: 'Natural Wood Finish with Red Roses' },
+                { name: 'shipping.delivery', type: 'text', label: 'Delivery Time', example: '5-7 business days' },
+                { name: 'shipping.packaging', type: 'text', label: 'Packaging', example: 'Premium gift box included' },
+                { name: 'shipping.shippingCost', type: 'text', label: 'Shipping Cost', example: 'Free shipping above ₹999' },
+                { name: 'careInstructions', type: 'textarea', label: 'Care Instructions', example: 'Wipe with dry cloth only. Keep away from direct sunlight and moisture. Use wood polish occasionally to maintain shine.' },
+                { name: 'features', type: 'text', label: 'Features (comma separated)', example: 'Handcrafted by skilled artisans, Intricate rose pattern carving, Soft velvet interior lining, Brass hinges and clasp, Personalization available, Gift wrapping included' }
             ]}
         ]
     },
@@ -55,10 +55,10 @@ const formFields = {
         description: 'Manage your product categories',
         fields: [
             { name: 'categories', type: 'array', label: 'Categories', itemFields: [
-                { name: 'name', type: 'text', label: 'Category Name' },
-                { name: 'description', type: 'textarea', label: 'Description' },
-                { name: 'image', type: 'text', label: 'Image URL' },
-                { name: 'href', type: 'text', label: 'Link URL' }
+                { name: 'name', type: 'text', label: 'Category Name', example: 'Gift Hamper' },
+                { name: 'description', type: 'textarea', label: 'Description', example: 'Curated collections of premium items beautifully packaged for the perfect gifting experience.' },
+                { name: 'image', type: 'text', label: 'Image URL', example: '/elegant-gift-boxes-with-pink-ribbons-on-white-back.jpg' },
+                { name: 'href', type: 'text', label: 'Link URL', example: '/gifts?category=gift-hamper' }
             ]}
         ]
     },
@@ -67,10 +67,10 @@ const formFields = {
         description: 'Manage shopping occasions',
         fields: [
             { name: 'occasions', type: 'array', label: 'Occasions', itemFields: [
-                { name: 'name', type: 'text', label: 'Occasion Name' },
-                { name: 'description', type: 'textarea', label: 'Description' },
-                { name: 'image', type: 'text', label: 'Image URL' },
-                { name: 'href', type: 'text', label: 'Link URL' }
+                { name: 'name', type: 'text', label: 'Occasion Name', example: 'Anniversary' },
+                { name: 'description', type: 'textarea', label: 'Description', example: 'Celebrate your love story with personalized keepsakes that capture your cherished memories.' },
+                { name: 'image', type: 'text', label: 'Image URL', example: '/anniversary-gifts-romantic-setup.jpg' },
+                { name: 'href', type: 'text', label: 'Link URL', example: '/gifts?occasion=anniversary' }
             ]}
         ]
     },
@@ -79,12 +79,12 @@ const formFields = {
         description: 'Manage customer testimonials',
         fields: [
             { name: 'testimonials', type: 'array', label: 'Testimonials', itemFields: [
-                { name: 'id', type: 'text', label: 'Testimonial ID' },
-                { name: 'name', type: 'text', label: 'Customer Name' },
-                { name: 'location', type: 'text', label: 'Location' },
-                { name: 'rating', type: 'number', label: 'Rating (1-5)' },
-                { name: 'comment', type: 'textarea', label: 'Customer Comment' },
-                { name: 'image', type: 'text', label: 'Customer Photo URL' }
+                { name: 'id', type: 'text', label: 'Testimonial ID', example: '1' },
+                { name: 'name', type: 'text', label: 'Customer Name', example: 'Priya Sharma' },
+                { name: 'location', type: 'text', label: 'Location', example: 'Mumbai, Anniversary Gift' },
+                { name: 'rating', type: 'number', label: 'Rating (1-5)', example: '5' },
+                { name: 'comment', type: 'textarea', label: 'Customer Comment', example: 'The memory album they created for our 10th anniversary was absolutely breathtaking. Every page told our story beautifully, and my husband was moved to tears. It\'s now our most treasured possession.' },
+                { name: 'image', type: 'text', label: 'Customer Photo URL', example: '/woman-smiling-testimonial-photo.jpg' }
             ]}
         ]
     },
@@ -92,24 +92,67 @@ const formFields = {
         title: 'About Page',
         description: 'Manage your about page content',
         fields: [
-            { name: 'about.title', type: 'text', label: 'Page Title' },
-            { name: 'about.subtitle', type: 'text', label: 'Subtitle' },
-            { name: 'about.description', type: 'textarea', label: 'Main Description' },
-            { name: 'about.learnJourneyText', type: 'text', label: 'Learn Journey Button Text' },
-            { name: 'about.story.title', type: 'text', label: 'Story Title' },
-            { name: 'about.story.paragraphs', type: 'textarea', label: 'Story Paragraphs (one per line)' },
-            { name: 'about.mission.title', type: 'text', label: 'Mission Title' },
-            { name: 'about.mission.content', type: 'textarea', label: 'Mission Content' },
+            { name: 'about.title', type: 'text', label: 'Page Title', example: 'About The Tohfa Creations' },
+            { name: 'about.subtitle', type: 'text', label: 'Subtitle', example: 'Love & Craftsmanship' },
+            { name: 'about.description', type: 'textarea', label: 'Main Description', example: 'Founded in 2016, The Tohfa Creations began as a small dream to create meaningful connections through handcrafted artistry. Every piece we create carries the passion and dedication of our skilled artisan team.' },
+            { name: 'about.learnJourneyText', type: 'text', label: 'Learn Journey Button Text', example: 'Learn Our Journey' },
+            { name: 'about.story.title', type: 'text', label: 'Story Title', example: 'Our Story' },
+            { name: 'about.story.paragraphs', type: 'textarea', label: 'Story Paragraphs (one per line)', example: 'It all started in 2016 when our founder, Sarah Martinez, created a handcrafted memory album for her parents\' 40th wedding anniversary. What began as a personal project to capture their love story quickly became something more—a realization that every family has precious moments worth preserving in a beautiful, meaningful way.' },
+            { name: 'about.mission.title', type: 'text', label: 'Mission Title', example: 'Our Mission' },
+            { name: 'about.mission.content', type: 'textarea', label: 'Mission Content', example: 'To create beautiful, personalized handmade gifts that capture life\'s most precious moments and bring joy to both giver and receiver. We strive to make every gift a cherished memory that lasts a lifetime.' },
             { name: 'about.whyChoose', type: 'array', label: 'Why Choose Us', itemFields: [
-                { name: 'icon', type: 'text', label: 'Icon Name' },
-                { name: 'title', type: 'text', label: 'Title' },
-                { name: 'description', type: 'textarea', label: 'Description' },
-                { name: 'link', type: 'text', label: 'Link Text' }
+                { name: 'icon', type: 'text', label: 'Icon Name', example: 'Heart' },
+                { name: 'title', type: 'text', label: 'Title', example: 'Premium Quality' },
+                { name: 'description', type: 'textarea', label: 'Description', example: 'We use only the finest materials and artisanal craftsmanship techniques to ensure every gift is built to last generations.' },
+                { name: 'link', type: 'text', label: 'Link Text', example: '100% Customer Satisfaction' }
             ]},
             { name: 'about.values', type: 'array', label: 'Company Values', itemFields: [
-                { name: 'icon', type: 'text', label: 'Icon Name' },
-                { name: 'title', type: 'text', label: 'Title' },
-                { name: 'description', type: 'textarea', label: 'Description' }
+                { name: 'icon', type: 'text', label: 'Icon Name', example: 'Heart' },
+                { name: 'title', type: 'text', label: 'Title', example: 'Love in Every Detail' },
+                { name: 'description', type: 'textarea', label: 'Description', example: 'We pour genuine care and attention into every aspect of our craft, ensuring each gift carries the love it\'s meant to express.' }
+            ]}
+        ]
+    },
+    'contact': {
+        title: 'Contact Information',
+        description: 'Manage your contact details',
+        fields: [
+            { name: 'contact.title', type: 'text', label: 'Contact Page Title', example: 'Contact Us' },
+            { name: 'contact.description', type: 'textarea', label: 'Contact Page Description', example: 'Get in touch with us for any questions about our handcrafted gifts.' },
+            { name: 'contact.phone', type: 'text', label: 'Phone Number', example: '+91 6396202262' },
+            { name: 'contact.available', type: 'text', label: 'Available Hours', example: 'Available 24/7' },
+            { name: 'contact.email', type: 'text', label: 'Email Address', example: 'tohfacreations3@gmail.com' },
+            { name: 'contact.responseTime', type: 'text', label: 'Response Time', example: 'We respond within 24 hours' },
+            { name: 'contact.address', type: 'textarea', label: 'Business Address', example: '28/476, Gokula Gali Gudri Mansoor Khan, Dhuliya Ganj, Agra-282003, Uttar Pradesh' }
+        ]
+    },
+    'site-config': {
+        title: 'Site Configuration',
+        description: 'Manage website settings',
+        fields: [
+            { name: 'siteConfig.siteName', type: 'text', label: 'Site Name', example: 'The Tohfa Creations' },
+            { name: 'siteConfig.siteUrl', type: 'text', label: 'Site URL', example: 'https://tohfacreations.com' },
+            { name: 'siteConfig.logo', type: 'text', label: 'Logo URL', example: '/logo.png' },
+            { name: 'siteConfig.favicon', type: 'text', label: 'Favicon URL', example: '/favicon.ico' }
+        ]
+    },
+    'custom-menu': {
+        title: 'Custom Menu',
+        description: 'Manage custom menus for special occasions',
+        fields: [
+            { name: 'customMenus', type: 'array', label: 'Custom Menus', itemFields: [
+                { name: 'id', type: 'text', label: 'Menu ID', example: '1' },
+                { name: 'name', type: 'text', label: 'Menu Name', example: 'Wedding Special Menu' },
+                { name: 'description', type: 'textarea', label: 'Menu Description', example: 'Special collection of wedding gifts and personalized items for the perfect celebration.' },
+                { name: 'items', type: 'array', label: 'Menu Items', itemFields: [
+                    { name: 'id', type: 'text', label: 'Item ID', example: '1' },
+                    { name: 'name', type: 'text', label: 'Item Name', example: 'Wedding Photo Album' },
+                    { name: 'price', type: 'number', label: 'Price (₹)', example: '2999' },
+                    { name: 'description', type: 'textarea', label: 'Item Description', example: 'Beautiful photo album perfect for wedding memories.' },
+                    { name: 'category', type: 'text', label: 'Category', example: 'gift-box' },
+                    { name: 'image', type: 'text', label: 'Item Image', example: '/wedding-photo-album.jpg' }
+                ]},
+                { name: 'isActive', type: 'checkbox', label: 'Menu Active', example: 'true' }
             ]}
         ]
     }
@@ -1467,25 +1510,46 @@ function generateSimpleField(field) {
     
     const label = document.createElement('label');
     label.textContent = field.label;
+    
+    // Add example if available
+    if (field.example) {
+        const exampleSpan = document.createElement('span');
+        exampleSpan.className = 'field-example';
+        exampleSpan.textContent = ` (Example: ${field.example})`;
+        label.appendChild(exampleSpan);
+    }
+    
     formGroup.appendChild(label);
     
     let input;
     if (field.type === 'textarea') {
         input = document.createElement('textarea');
+        if (field.example) {
+            input.placeholder = field.example;
+        }
     } else if (field.type === 'select') {
         input = document.createElement('select');
         field.options.forEach(option => {
             const optionElement = document.createElement('option');
             optionElement.value = option;
             optionElement.textContent = option;
+            if (field.example && option === field.example) {
+                optionElement.selected = true;
+            }
             input.appendChild(optionElement);
         });
     } else if (field.type === 'checkbox') {
         input = document.createElement('input');
         input.type = 'checkbox';
+        if (field.example === 'true') {
+            input.checked = true;
+        }
     } else {
         input = document.createElement('input');
         input.type = field.type;
+        if (field.example) {
+            input.placeholder = field.example;
+        }
     }
     
     input.name = field.name;
@@ -1551,25 +1615,46 @@ function addArrayItem(field, container, index = null) {
         
         const fieldLabel = document.createElement('label');
         fieldLabel.textContent = itemField.label;
+        
+        // Add example if available
+        if (itemField.example) {
+            const exampleSpan = document.createElement('span');
+            exampleSpan.className = 'field-example';
+            exampleSpan.textContent = ` (Example: ${itemField.example})`;
+            fieldLabel.appendChild(exampleSpan);
+        }
+        
         fieldGroup.appendChild(fieldLabel);
         
         let input;
         if (itemField.type === 'textarea') {
             input = document.createElement('textarea');
+            if (itemField.example) {
+                input.placeholder = itemField.example;
+            }
         } else if (itemField.type === 'select') {
             input = document.createElement('select');
             itemField.options.forEach(option => {
                 const optionElement = document.createElement('option');
                 optionElement.value = option;
                 optionElement.textContent = option;
+                if (itemField.example && option === itemField.example) {
+                    optionElement.selected = true;
+                }
                 input.appendChild(optionElement);
             });
         } else if (itemField.type === 'checkbox') {
             input = document.createElement('input');
             input.type = 'checkbox';
+            if (itemField.example === 'true') {
+                input.checked = true;
+            }
         } else {
             input = document.createElement('input');
             input.type = itemField.type;
+            if (itemField.example) {
+                input.placeholder = itemField.example;
+            }
         }
         
         input.name = field.name + '_' + itemIndex + '_' + itemField.name;
