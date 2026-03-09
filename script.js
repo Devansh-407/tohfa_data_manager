@@ -1,7 +1,119 @@
 // Data Manager JavaScript
 let currentManager = null;
+let currentFormManager = null;
 let products = [];
 let customMenus = [];
+
+// Form-based field definitions for each data type
+const formFields = {
+    'navigation': {
+        title: 'Navigation Menu',
+        description: 'Manage your website navigation menu',
+        fields: [
+            { name: 'navItems', type: 'array', label: 'Navigation Items', itemFields: [
+                { name: 'name', type: 'text', label: 'Menu Item Name' },
+                { name: 'href', type: 'text', label: 'Link URL' }
+            ]}
+        ]
+    },
+    'products': {
+        title: 'Products',
+        description: 'Manage your complete product catalog',
+        fields: [
+            { name: 'topSelling.title', type: 'text', label: 'Top Selling Title' },
+            { name: 'topSelling.description', type: 'textarea', label: 'Top Selling Description' },
+            { name: 'topSelling.productIds', type: 'text', label: 'Top Selling Product IDs (comma separated)' },
+            { name: 'products', type: 'array', label: 'Products', itemFields: [
+                { name: 'id', type: 'text', label: 'Product ID' },
+                { name: 'name', type: 'text', label: 'Product Name' },
+                { name: 'description', type: 'textarea', label: 'Description' },
+                { name: 'price', type: 'number', label: 'Price (₹)' },
+                { name: 'originalPrice', type: 'number', label: 'Original Price (₹)' },
+                { name: 'images', type: 'text', label: 'Images (comma separated)' },
+                { name: 'gif', type: 'text', label: 'GIF URL' },
+                { name: 'video', type: 'text', label: 'Video URL' },
+                { name: 'category', type: 'select', label: 'Category', options: ['gift-hamper', 'gift-box', 'bouquet', 'miniature', 'frame'] },
+                { name: 'occasion', type: 'select', label: 'Occasion', options: ['anniversary', 'birthday', 'proposal', 'wedding', 'graduation'] },
+                { name: 'rating', type: 'number', label: 'Rating (1-5)' },
+                { name: 'reviewCount', type: 'number', label: 'Review Count' },
+                { name: 'customizationLevel', type: 'select', label: 'Customization Level', options: ['basic', 'standard', 'premium'] },
+                { name: 'inStock', type: 'checkbox', label: 'In Stock' },
+                { name: 'specifications.material', type: 'text', label: 'Material' },
+                { name: 'specifications.size', type: 'text', label: 'Size' },
+                { name: 'specifications.weight', type: 'text', label: 'Weight' },
+                { name: 'specifications.color', type: 'text', label: 'Color' },
+                { name: 'shipping.delivery', type: 'text', label: 'Delivery Time' },
+                { name: 'shipping.packaging', type: 'text', label: 'Packaging' },
+                { name: 'shipping.shippingCost', type: 'text', label: 'Shipping Cost' },
+                { name: 'careInstructions', type: 'textarea', label: 'Care Instructions' },
+                { name: 'features', type: 'text', label: 'Features (comma separated)' }
+            ]}
+        ]
+    },
+    'categories': {
+        title: 'Categories',
+        description: 'Manage your product categories',
+        fields: [
+            { name: 'categories', type: 'array', label: 'Categories', itemFields: [
+                { name: 'name', type: 'text', label: 'Category Name' },
+                { name: 'description', type: 'textarea', label: 'Description' },
+                { name: 'image', type: 'text', label: 'Image URL' },
+                { name: 'href', type: 'text', label: 'Link URL' }
+            ]}
+        ]
+    },
+    'occasions': {
+        title: 'Occasions',
+        description: 'Manage shopping occasions',
+        fields: [
+            { name: 'occasions', type: 'array', label: 'Occasions', itemFields: [
+                { name: 'name', type: 'text', label: 'Occasion Name' },
+                { name: 'description', type: 'textarea', label: 'Description' },
+                { name: 'image', type: 'text', label: 'Image URL' },
+                { name: 'href', type: 'text', label: 'Link URL' }
+            ]}
+        ]
+    },
+    'testimonials': {
+        title: 'Testimonials',
+        description: 'Manage customer testimonials',
+        fields: [
+            { name: 'testimonials', type: 'array', label: 'Testimonials', itemFields: [
+                { name: 'id', type: 'text', label: 'Testimonial ID' },
+                { name: 'name', type: 'text', label: 'Customer Name' },
+                { name: 'location', type: 'text', label: 'Location' },
+                { name: 'rating', type: 'number', label: 'Rating (1-5)' },
+                { name: 'comment', type: 'textarea', label: 'Customer Comment' },
+                { name: 'image', type: 'text', label: 'Customer Photo URL' }
+            ]}
+        ]
+    },
+    'about': {
+        title: 'About Page',
+        description: 'Manage your about page content',
+        fields: [
+            { name: 'about.title', type: 'text', label: 'Page Title' },
+            { name: 'about.subtitle', type: 'text', label: 'Subtitle' },
+            { name: 'about.description', type: 'textarea', label: 'Main Description' },
+            { name: 'about.learnJourneyText', type: 'text', label: 'Learn Journey Button Text' },
+            { name: 'about.story.title', type: 'text', label: 'Story Title' },
+            { name: 'about.story.paragraphs', type: 'textarea', label: 'Story Paragraphs (one per line)' },
+            { name: 'about.mission.title', type: 'text', label: 'Mission Title' },
+            { name: 'about.mission.content', type: 'textarea', label: 'Mission Content' },
+            { name: 'about.whyChoose', type: 'array', label: 'Why Choose Us', itemFields: [
+                { name: 'icon', type: 'text', label: 'Icon Name' },
+                { name: 'title', type: 'text', label: 'Title' },
+                { name: 'description', type: 'textarea', label: 'Description' },
+                { name: 'link', type: 'text', label: 'Link Text' }
+            ]},
+            { name: 'about.values', type: 'array', label: 'Company Values', itemFields: [
+                { name: 'icon', type: 'text', label: 'Icon Name' },
+                { name: 'title', type: 'text', label: 'Title' },
+                { name: 'description', type: 'textarea', label: 'Description' }
+            ]}
+        ]
+    }
+};
 
 // Templates for different data types - only the 8 files that actually exist
 const templates = {
@@ -1309,6 +1421,259 @@ function downloadCustomMenus() {
     const a = document.createElement('a');
     a.href = url;
     a.download = 'custom-menu.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+// Form-based Manager Functions
+function openFormManager(type) {
+    currentFormManager = type;
+    document.getElementById('dataGrid').style.display = 'none';
+    document.getElementById('formManagerSection').style.display = 'block';
+    
+    const config = formFields[type];
+    document.getElementById('formManagerTitle').textContent = config.title;
+    document.getElementById('formManagerDescription').textContent = config.description;
+    
+    generateFormFields(config.fields);
+    document.getElementById('jsonOutputSection').style.display = 'none';
+}
+
+function closeFormManager() {
+    document.getElementById('formManagerSection').style.display = 'none';
+    document.getElementById('dataGrid').style.display = 'grid';
+    currentFormManager = null;
+}
+
+function generateFormFields(fields) {
+    const container = document.getElementById('formContainer');
+    container.innerHTML = '';
+    
+    fields.forEach(field => {
+        if (field.type === 'array') {
+            generateArrayField(field);
+        } else {
+            generateSimpleField(field);
+        }
+    });
+}
+
+function generateSimpleField(field) {
+    const container = document.getElementById('formContainer');
+    const formGroup = document.createElement('div');
+    formGroup.className = 'form-group';
+    
+    const label = document.createElement('label');
+    label.textContent = field.label;
+    formGroup.appendChild(label);
+    
+    let input;
+    if (field.type === 'textarea') {
+        input = document.createElement('textarea');
+    } else if (field.type === 'select') {
+        input = document.createElement('select');
+        field.options.forEach(option => {
+            const optionElement = document.createElement('option');
+            optionElement.value = option;
+            optionElement.textContent = option;
+            input.appendChild(optionElement);
+        });
+    } else if (field.type === 'checkbox') {
+        input = document.createElement('input');
+        input.type = 'checkbox';
+    } else {
+        input = document.createElement('input');
+        input.type = field.type;
+    }
+    
+    input.name = field.name;
+    input.id = field.name;
+    formGroup.appendChild(input);
+    container.appendChild(formGroup);
+}
+
+function generateArrayField(field) {
+    const container = document.getElementById('formContainer');
+    const formGroup = document.createElement('div');
+    formGroup.className = 'form-group';
+    
+    const label = document.createElement('label');
+    label.textContent = field.label;
+    formGroup.appendChild(label);
+    
+    const arrayContainer = document.createElement('div');
+    arrayContainer.id = field.name + '_container';
+    arrayContainer.className = 'array-container';
+    
+    // Add one initial item
+    addArrayItem(field, arrayContainer, 0);
+    
+    // Add button to add more items
+    const addButton = document.createElement('button');
+    addButton.className = 'add-item-btn';
+    addButton.textContent = '+ Add ' + field.label;
+    addButton.onclick = () => addArrayItem(field, arrayContainer);
+    
+    formGroup.appendChild(arrayContainer);
+    formGroup.appendChild(addButton);
+    container.appendChild(formGroup);
+}
+
+function addArrayItem(field, container, index = null) {
+    const itemIndex = index !== null ? index : container.children.length;
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'array-item';
+    
+    const header = document.createElement('div');
+    header.className = 'array-item-header';
+    
+    const title = document.createElement('span');
+    title.className = 'array-item-title';
+    title.textContent = field.label + ' ' + (itemIndex + 1);
+    header.appendChild(title);
+    
+    if (itemIndex > 0) {
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'remove-item-btn';
+        removeBtn.textContent = 'Remove';
+        removeBtn.onclick = () => itemDiv.remove();
+        header.appendChild(removeBtn);
+    }
+    
+    itemDiv.appendChild(header);
+    
+    // Add fields for this array item
+    field.itemFields.forEach(itemField => {
+        const fieldGroup = document.createElement('div');
+        fieldGroup.className = 'form-group';
+        
+        const fieldLabel = document.createElement('label');
+        fieldLabel.textContent = itemField.label;
+        fieldGroup.appendChild(fieldLabel);
+        
+        let input;
+        if (itemField.type === 'textarea') {
+            input = document.createElement('textarea');
+        } else if (itemField.type === 'select') {
+            input = document.createElement('select');
+            itemField.options.forEach(option => {
+                const optionElement = document.createElement('option');
+                optionElement.value = option;
+                optionElement.textContent = option;
+                input.appendChild(optionElement);
+            });
+        } else if (itemField.type === 'checkbox') {
+            input = document.createElement('input');
+            input.type = 'checkbox';
+        } else {
+            input = document.createElement('input');
+            input.type = itemField.type;
+        }
+        
+        input.name = field.name + '_' + itemIndex + '_' + itemField.name;
+        input.id = field.name + '_' + itemIndex + '_' + itemField.name;
+        fieldGroup.appendChild(input);
+        itemDiv.appendChild(fieldGroup);
+    });
+    
+    if (index === null) {
+        container.appendChild(itemDiv);
+    } else {
+        container.insertBefore(itemDiv, container.children[index]);
+    }
+}
+
+function generateJSONFromForm() {
+    const config = formFields[currentFormManager];
+    const result = {};
+    
+    config.fields.forEach(field => {
+        if (field.type === 'array') {
+            result[field.name] = getArrayData(field);
+        } else {
+            result[field.name] = getFieldValue(field.name);
+        }
+    });
+    
+    const jsonOutput = document.getElementById('jsonOutput');
+    jsonOutput.value = JSON.stringify(result, null, 2);
+    document.getElementById('jsonOutputSection').style.display = 'block';
+}
+
+function getArrayData(field) {
+    const container = document.getElementById(field.name + '_container');
+    const items = [];
+    
+    Array.from(container.children).forEach((itemDiv, index) => {
+        const itemData = {};
+        field.itemFields.forEach(itemField => {
+            const inputName = field.name + '_' + index + '_' + itemField.name;
+            const value = getFieldValue(inputName);
+            if (itemField.type === 'number') {
+                itemData[itemField.name] = parseFloat(value) || 0;
+            } else if (itemField.type === 'checkbox') {
+                itemData[itemField.name] = document.getElementById(inputName).checked;
+            } else if (itemField.type.includes('text') || itemField.type === 'textarea') {
+                if (itemField.name.includes('.')) {
+                    setNestedValue(itemData, itemField.name, value);
+                } else {
+                    itemData[itemField.name] = value;
+                }
+            }
+        });
+        items.push(itemData);
+    });
+    
+    return items;
+}
+
+function setNestedValue(obj, path, value) {
+    const keys = path.split('.');
+    let current = obj;
+    
+    for (let i = 0; i < keys.length - 1; i++) {
+        if (!current[keys[i]]) {
+            current[keys[i]] = {};
+        }
+        current = current[keys[i]];
+    }
+    
+    current[keys[keys.length - 1]] = value;
+}
+
+function getFieldValue(fieldName) {
+    const element = document.getElementById(fieldName);
+    if (!element) return '';
+    
+    if (element.type === 'checkbox') {
+        return element.checked;
+    } else if (element.type === 'number') {
+        return parseFloat(element.value) || 0;
+    } else {
+        return element.value;
+    }
+}
+
+function resetForm() {
+    const container = document.getElementById('formContainer');
+    container.innerHTML = '';
+    
+    const config = formFields[currentFormManager];
+    generateFormFields(config.fields);
+    document.getElementById('jsonOutputSection').style.display = 'none';
+}
+
+function downloadGeneratedJSON() {
+    const jsonOutput = document.getElementById('jsonOutput');
+    const jsonData = JSON.parse(jsonOutput.value);
+    
+    const blob = new Blob([JSON.stringify(jsonData, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = currentFormManager + '.json';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
