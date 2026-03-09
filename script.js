@@ -91,16 +91,16 @@ const templates = {
         ]
     },
     'testimonials': {
-        "_instructions": "Update your customer testimonials here.",
-        "_fields": {
-            "id": "Unique testimonial ID",
-            "name": "Customer name",
-            "location": "Customer location and occasion",
-            "rating": "Rating from 1-5",
-            "comment": "Customer review text",
-            "image": "Customer photo filename (optional)"
-        },
-        "testimonials": []
+        "testimonials": [
+            {
+                "id": "1",
+                "name": "Priya Sharma",
+                "location": "Mumbai, Anniversary Gift",
+                "rating": 5,
+                "comment": "The memory album they created for our 10th anniversary was absolutely breathtaking. Every page told our story beautifully, and my husband was moved to tears. It's now our most treasured possession.",
+                "image": "/woman-smiling-testimonial-photo.jpg"
+            }
+        ]
     },
     'categories': {
         "categories": [
@@ -1006,16 +1006,8 @@ function getExampleData(type) {
                     "name": "Priya Sharma",
                     "location": "Mumbai, Anniversary Gift",
                     "rating": 5,
-                    "comment": "Amazing quality and beautiful packaging!",
-                    "image": "/customer1.jpg"
-                },
-                {
-                    "id": "2",
-                    "name": "Rahul Verma",
-                    "location": "Delhi, Birthday Gift",
-                    "rating": 5,
-                    "comment": "Perfect gift for my wife's birthday!",
-                    "image": "/customer2.jpg"
+                    "comment": "The memory album they created for our 10th anniversary was absolutely breathtaking. Every page told our story beautifully, and my husband was moved to tears. It's now our most treasured possession.",
+                    "image": "/woman-smiling-testimonial-photo.jpg"
                 }
             ]
         },
