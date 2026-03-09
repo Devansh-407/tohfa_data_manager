@@ -394,15 +394,6 @@ const templates = {
                     "redirectLink": "https://instagram.com/p/DEF789"
                 }
             ]
-                    {
-                        "platform": "Instagram",
-                        "timeAgo": "3 days ago",
-                        "content": "Emily's reaction when she received her custom photo album was priceless. 💕",
-                        "image": "/recent-post-3.jpg",
-                        "redirectLink": "https://instagram.com/p/DEF789"
-                    }
-                ]
-            }
         }
     },
     'site-config': {
