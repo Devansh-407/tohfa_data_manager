@@ -158,15 +158,64 @@ const templates = {
     'about': {
         "about": {
             "title": "About The Tohfa Creations",
-            "description": "Your company description",
-            "story": "Your company story",
-            "mission": "Your mission statement",
-            "values": [
-                "Value 1",
-                "Value 2",
-                "Value 3"
+            "subtitle": "Love & Craftsmanship",
+            "description": "Founded in 2016, The Tohfa Creations began as a small dream to create meaningful connections through handcrafted artistry. Every piece we create carries the passion and dedication of our skilled artisan team.",
+            "learnJourneyText": "Learn Our Journey"
+        },
+        "story": {
+            "title": "Our Story",
+            "paragraphs": [
+                "It all started in 2016 when our founder, Sarah Martinez, created a handcrafted memory album for her parents' 40th wedding anniversary. What began as a personal project to capture their love story quickly became something more—a realization that every family has precious moments worth preserving in a beautiful, meaningful way.",
+                "That first album, filled with carefully selected photos, handwritten notes, and personal touches, moved her parents to tears. Friends and family who saw it began asking Sarah to create similar keepsakes for their own special occasions. Word spread, and what started as a passion project in her small apartment studio grew into The Tohfa Creations.",
+                "Today, we're a team of skilled artisans dedicated to creating handcrafted gifts that tell your unique story. From anniversary gifts to birthday surprises, proposal setups to memory albums, we pour our hearts into every piece, ensuring it becomes a treasured heirloom that celebrates life's most precious moments."
             ]
-        }
+        },
+        "mission": {
+            "title": "Our Mission",
+            "content": "To create beautiful, personalized handmade gifts that capture life's most precious moments and bring joy to both giver and receiver. We strive to make every gift a cherished memory that lasts a lifetime."
+        },
+        "whyChoose": [
+            {
+                "icon": "Heart",
+                "title": "Premium Quality",
+                "description": "We use only the finest materials and artisanal craftsmanship techniques to ensure every gift is built to last generations.",
+                "link": "100% Customer Satisfaction"
+            },
+            {
+                "icon": "HandHeart",
+                "title": "Personal Touch",
+                "description": "Every piece is uniquely crafted to tell your personal story, making each gift as individual as the person receiving it.",
+                "link": "100% Personalization"
+            },
+            {
+                "icon": "Clock",
+                "title": "Timely Delivery",
+                "description": "We understand the importance of special moments and guarantee your handcrafted gift will arrive exactly when you need it.",
+                "link": "On-Time Guarantee"
+            }
+        ],
+        "values": [
+            {
+                "icon": "Heart",
+                "title": "Love in Every Detail",
+                "description": "We pour genuine care and attention into every aspect of our craft, ensuring each gift carries the love it's meant to express."
+            },
+            {
+                "icon": "Leaf",
+                "title": "Sustainable Practices",
+                "description": "We are committed to environmental responsibility, using eco-friendly materials and sustainable crafting methods in all our creations."
+            },
+            {
+                "icon": "Users",
+                "title": "Community Connection",
+                "description": "We believe in supporting local artisans and giving back to our community through workshops and charitable partnerships."
+            },
+            {
+                "icon": "Ribbon",
+                "title": "Lasting Memories",
+                "description": "Our mission is to create heirloom-quality gifts that will be treasured for generations, preserving precious memories forever."
+            }
+        ]
     },
     'contact': {
         "_instructions": "SISTER: Update your contact information here.",
@@ -391,15 +440,64 @@ const templates = {
         "_instructions": "Update your about section information here.",
         "about": {
             "title": "About The Tohfa Creations",
-            "description": "Your company description",
-            "story": "Your company story",
-            "mission": "Your mission statement",
-            "values": [
-                "Value 1",
-                "Value 2",
-                "Value 3"
+            "subtitle": "Love & Craftsmanship",
+            "description": "Founded in 2016, The Tohfa Creations began as a small dream to create meaningful connections through handcrafted artistry. Every piece we create carries the passion and dedication of our skilled artisan team.",
+            "learnJourneyText": "Learn Our Journey"
+        },
+        "story": {
+            "title": "Our Story",
+            "paragraphs": [
+                "It all started in 2016 when our founder, Sarah Martinez, created a handcrafted memory album for her parents' 40th wedding anniversary. What began as a personal project to capture their love story quickly became something more—a realization that every family has precious moments worth preserving in a beautiful, meaningful way.",
+                "That first album, filled with carefully selected photos, handwritten notes, and personal touches, moved her parents to tears. Friends and family who saw it began asking Sarah to create similar keepsakes for their own special occasions. Word spread, and what started as a passion project in her small apartment studio grew into The Tohfa Creations.",
+                "Today, we're a team of skilled artisans dedicated to creating handcrafted gifts that tell your unique story. From anniversary gifts to birthday surprises, proposal setups to memory albums, we pour our hearts into every piece, ensuring it becomes a treasured heirloom that celebrates life's most precious moments."
             ]
-        }
+        },
+        "mission": {
+            "title": "Our Mission",
+            "content": "To create beautiful, personalized handmade gifts that capture life's most precious moments and bring joy to both giver and receiver. We strive to make every gift a cherished memory that lasts a lifetime."
+        },
+        "whyChoose": [
+            {
+                "icon": "Heart",
+                "title": "Premium Quality",
+                "description": "We use only the finest materials and artisanal craftsmanship techniques to ensure every gift is built to last generations.",
+                "link": "100% Customer Satisfaction"
+            },
+            {
+                "icon": "HandHeart",
+                "title": "Personal Touch",
+                "description": "Every piece is uniquely crafted to tell your personal story, making each gift as individual as the person receiving it.",
+                "link": "100% Personalization"
+            },
+            {
+                "icon": "Clock",
+                "title": "Timely Delivery",
+                "description": "We understand the importance of special moments and guarantee your handcrafted gift will arrive exactly when you need it.",
+                "link": "On-Time Guarantee"
+            }
+        ],
+        "values": [
+            {
+                "icon": "Heart",
+                "title": "Love in Every Detail",
+                "description": "We pour genuine care and attention into every aspect of our craft, ensuring each gift carries the love it's meant to express."
+            },
+            {
+                "icon": "Leaf",
+                "title": "Sustainable Practices",
+                "description": "We are committed to environmental responsibility, using eco-friendly materials and sustainable crafting methods in all our creations."
+            },
+            {
+                "icon": "Users",
+                "title": "Community Connection",
+                "description": "We believe in supporting local artisans and giving back to our community through workshops and charitable partnerships."
+            },
+            {
+                "icon": "Ribbon",
+                "title": "Lasting Memories",
+                "description": "Our mission is to create heirloom-quality gifts that will be treasured for generations, preserving precious memories forever."
+            }
+        ]
     },
     categories: {
         "categories": [
