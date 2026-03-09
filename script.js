@@ -103,21 +103,12 @@ const templates = {
         "testimonials": []
     },
     'categories': {
-        "_instructions": "SISTER: Update your product categories here. These help organize your products.",
-        "_fields": {
-            "id": "Unique category ID (never change existing IDs)",
-            "name": "Category name as shown to customers",
-            "description": "Category description for customers",
-            "icon": "Lucide icon name (Gift, Heart, Star, Package, etc.)",
-            "image": "Category image filename in /public folder"
-        },
         "categories": [
             {
-                "id": "gift-hamper",
-                "name": "Gift Hampers",
-                "description": "Curated gift boxes with multiple items for special occasions.",
-                "icon": "Package",
-                "image": "/gift-hampers-category.jpg"
+                "name": "Gift Hamper",
+                "description": "Curated collections of premium items beautifully packaged for the perfect gifting experience.",
+                "image": "/elegant-gift-boxes-with-pink-ribbons-on-white-back.jpg",
+                "href": "/gifts?category=gift-hamper"
             },
             {
                 "name": "Gift Box",
@@ -971,16 +962,16 @@ function getExampleData(type) {
         categories: {
             "categories": [
                 {
-                    "name": "Anniversary",
-                    "description": "Celebrate your love story",
-                    "image": "/anniversary-gifts.jpg",
-                    "href": "/gifts?occasion=anniversary"
+                    "name": "Gift Hamper",
+                    "description": "Curated collections of premium items beautifully packaged for the perfect gifting experience.",
+                    "image": "/elegant-gift-boxes-with-pink-ribbons-on-white-back.jpg",
+                    "href": "/gifts?category=gift-hamper"
                 },
                 {
-                    "name": "Birthday",
-                    "description": "Make their special day unforgettable",
-                    "image": "/birthday-gifts.jpg",
-                    "href": "/gifts?occasion=birthday"
+                    "name": "Gift Box",
+                    "description": "Elegant gift boxes filled with carefully selected items tailored to your special occasion.",
+                    "image": "/vintage-wooden-jewelry-box-with-rose-patterns.jpg",
+                    "href": "/gifts?category=gift-box"
                 }
             ]
         },
