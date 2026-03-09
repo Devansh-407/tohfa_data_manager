@@ -143,36 +143,6 @@ const templates = {
                 "description": "Celebrate your love story with personalized keepsakes that capture your cherished memories.",
                 "image": "/anniversary-gifts-romantic-setup.jpg",
                 "href": "/gifts?occasion=anniversary"
-            },
-            {
-                "name": "Birthday",
-                "description": "Make their special day unforgettable with unique, personalized gifts tailored to their personality.",
-                "image": "/birthday-celebration-colorful-gifts.jpg",
-                "href": "/gifts?occasion=birthday"
-            },
-            {
-                "name": "Proposal",
-                "description": "Create the perfect moment with romantic proposal setups and custom engagement gifts.",
-                "image": "/romantic-proposal-setup-with-roses.jpg",
-                "href": "/gifts?occasion=proposal"
-            },
-            {
-                "name": "Wedding",
-                "description": "Elegant and thoughtful gifts to celebrate the union of two souls beginning their journey together.",
-                "image": "/elegant-wedding-gifts-decorative-setup.jpg",
-                "href": "/gifts?occasion=wedding"
-            },
-            {
-                "name": "Graduation",
-                "description": "Commemorate academic achievements with meaningful gifts that mark this important milestone.",
-                "image": "/graduation-celebration-gifts-display.jpg",
-                "href": "/gifts?occasion=graduation"
-            },
-            {
-                "name": "Hulalal",
-                "description": "Celebrate your love story with personalized keepsakes",
-                "image": "/anniversary-image.jpg",
-                "href": "/gifts?occasion=hulalal"
             }
         ]
     },
@@ -1011,8 +981,8 @@ function getExampleData(type) {
             "occasions": [
                 {
                     "name": "Anniversary",
-                    "description": "Celebrate your love story with personalized keepsakes",
-                    "image": "/anniversary-gifts.jpg",
+                    "description": "Celebrate your love story with personalized keepsakes that capture your cherished memories.",
+                    "image": "/anniversary-gifts-romantic-setup.jpg",
                     "href": "/gifts?occasion=anniversary"
                 },
                 {
