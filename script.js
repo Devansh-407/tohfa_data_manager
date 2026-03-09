@@ -3,7 +3,7 @@ let currentManager = null;
 let products = [];
 let customMenus = [];
 
-// Templates for different data types
+// Templates for different data types - only the 8 files that actually exist
 const templates = {
     'products': {
         "_instructions": "SISTER: Update your complete product catalog here. All products and featured items in one place!",
