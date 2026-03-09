@@ -137,13 +137,6 @@ const templates = {
         ]
     },
     'occasions': {
-        "_instructions": "SISTER: Update your shop occasions here. These appear on the home page.",
-        "_fields": {
-            "name": "Occasion name as shown to customers",
-            "description": "Occasion description for customers",
-            "image": "Image filename in /public folder",
-            "href": "Link to filtered products (keep the ?occasion= part)"
-        },
         "occasions": [
             {
                 "name": "Anniversary",
@@ -584,42 +577,6 @@ const templates = {
                     }
                 ]
             }
-        }
-    },
-    occasions: {
-        "_instructions": "SISTER: Update your shop occasions here. These appear on the home page.",
-        "_fields": {
-            "name": "Occasion name as shown to customers",
-            "description": "Occasion description for customers",
-            "image": "Image filename in /public folder",
-            "href": "Link to filtered products (keep the ?occasion= part)"
-        },
-        "occasions": [
-            {
-                "name": "Anniversary",
-                "description": "Celebrate your love story with personalized keepsakes that capture your cherished memories.",
-                "image": "/anniversary-gifts-romantic-setup.jpg",
-                "href": "/gifts?occasion=anniversary"
-            },
-            {
-                "name": "Birthday",
-                "description": "Make their special day unforgettable with unique, personalized gifts tailored to their personality.",
-                "image": "/birthday-celebration-colorful-gifts.jpg",
-                "href": "/gifts?occasion=birthday"
-            }
-        ]
-    },
-    testimonials: {
-        "_instructions": "Add customer testimonials here.",
-        "testimonials": []
-    },
-    'site-config': {
-        "_instructions": "Update website configuration here.",
-        "siteConfig": {
-            "siteName": "The Tohfa Creations",
-            "siteUrl": "https://yourwebsite.com",
-            "logo": "/logo.png",
-            "favicon": "/favicon.ico"
         }
     },
     'top-selling': {
