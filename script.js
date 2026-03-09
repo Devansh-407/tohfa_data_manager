@@ -6,14 +6,20 @@ let customMenus = [];
 
 // Form-based field definitions for each data type
 const formFields = {
-    'navigation': {
-        title: 'Navigation Menu',
-        description: 'Manage your website navigation menu',
+    'footer': {
+        title: 'Footer Content',
+        description: 'Manage website footer information',
         fields: [
-            { name: 'navItems', type: 'array', label: 'Navigation Items', itemFields: [
-                { name: 'name', type: 'text', label: 'Menu Item Name', example: 'Home' },
-                { name: 'href', type: 'text', label: 'Link URL', example: '/' }
-            ]}
+            { name: 'companyName', type: 'text', label: 'Company Name', example: 'The Tohfa Creations' },
+            { name: 'companyDescription', type: 'textarea', label: 'Company Description', example: 'Creating meaningful connections through handcrafted gifts and personalized experiences.' },
+            { name: 'quickLinksTitle', type: 'text', label: 'Quick Links Title', example: 'Quick Links' },
+            { name: 'contactInfoTitle', type: 'text', label: 'Contact Info Title', example: 'Contact Info' },
+            { name: 'followUsTitle', type: 'text', label: 'Follow Us Title', example: 'Follow Us' },
+            { name: 'socialMedia', type: 'array', label: 'Social Media Links', itemFields: [
+                { name: 'platform', type: 'text', label: 'Platform', example: 'Facebook' },
+                { name: 'link', type: 'text', label: 'Link', example: 'https://facebook.com/tohfacreations' }
+            ]},
+            { name: 'copyright', type: 'text', label: 'Copyright Text', example: '&copy; 2025 The Tohfa Creations. All rights reserved.' }
         ]
     },
     'products': {
@@ -132,8 +138,6 @@ const formFields = {
                 { name: 'followers', type: 'text', label: 'Followers Count', example: '12.5K followers' },
                 { name: 'link', type: 'text', label: 'Social Media Link', example: 'https://facebook.com/tohfacreations' }
             ]},
-            { name: 'contact.recentPosts.title', type: 'text', label: 'Recent Posts Title', example: 'Recent Posts' },
-            { name: 'contact.recentPosts.description', type: 'textarea', label: 'Recent Posts Description', example: 'See what we\'ve been working on lately' },
             { name: 'contact.recentPosts', type: 'array', label: 'Recent Posts', itemFields: [
                 { name: 'platform', type: 'text', label: 'Platform', example: 'Instagram' },
                 { name: 'timeAgo', type: 'text', label: 'Time Ago', example: '2 hours ago' },
@@ -249,30 +253,38 @@ const templates = {
         "whyChoose": [],
         "values": []
     },
-    'navigation': {
-        "_instructions": "SISTER: Update your website navigation menu here.",
+    'footer': {
+        "_instructions": "Manage website footer content here.",
         "_fields": {
-            "name": "Menu item name as shown to customers",
-            "href": "Link destination URL"
+            "companyName": "Your company name",
+            "companyDescription": "Brief description of your company",
+            "quickLinksTitle": "Title for quick links section",
+            "contactInfoTitle": "Title for contact info section", 
+            "followUsTitle": "Title for social media section",
+            "socialMedia.platform": "Social media platform name",
+            "socialMedia.link": "Social media profile link",
+            "copyright": "Copyright notice text"
         },
-        "navItems": [
+        "companyName": "The Tohfa Creations",
+        "companyDescription": "Creating meaningful connections through handcrafted gifts and personalized experiences.",
+        "quickLinksTitle": "Quick Links",
+        "contactInfoTitle": "Contact Info",
+        "followUsTitle": "Follow Us",
+        "socialMedia": [
             {
-                "name": "Home",
-                "href": "/"
+                "platform": "Facebook",
+                "link": "https://facebook.com/tohfacreations"
             },
             {
-                "name": "About",
-                "href": "/about"
+                "platform": "Instagram", 
+                "link": "https://instagram.com/tohfacreations"
             },
             {
-                "name": "Gifts",
-                "href": "/gifts"
-            },
-            {
-                "name": "Contact",
-                "href": "/contact"
+                "platform": "Twitter",
+                "link": "https://twitter.com/tohfacreations"
             }
-        ]
+        ],
+        "copyright": "&copy; 2025 The Tohfa Creations. All rights reserved."
     },
     'testimonials': {
         "testimonials": [
@@ -1284,30 +1296,38 @@ function getExampleData(type) {
                 "productIds": ["1", "2", "3", "4", "5"]
             }
         },
-        'navigation': {
-            "_instructions": "SISTER: Update your website navigation menu here.",
+        'footer': {
+            "_instructions": "Manage website footer content here.",
             "_fields": {
-                "name": "Menu item name as shown to customers",
-                "href": "Link destination URL"
+                "companyName": "Your company name",
+                "companyDescription": "Brief description of your company",
+                "quickLinksTitle": "Title for quick links section",
+                "contactInfoTitle": "Title for contact info section", 
+                "followUsTitle": "Title for social media section",
+                "socialMedia.platform": "Social media platform name",
+                "socialMedia.link": "Social media profile link",
+                "copyright": "Copyright notice text"
             },
-            "navItems": [
+            "companyName": "The Tohfa Creations",
+            "companyDescription": "Creating meaningful connections through handcrafted gifts and personalized experiences.",
+            "quickLinksTitle": "Quick Links",
+            "contactInfoTitle": "Contact Info",
+            "followUsTitle": "Follow Us",
+            "socialMedia": [
                 {
-                    "name": "Home",
-                    "href": "/"
+                    "platform": "Facebook",
+                    "link": "https://facebook.com/tohfacreations"
                 },
                 {
-                    "name": "About",
-                    "href": "/about"
+                    "platform": "Instagram", 
+                    "link": "https://instagram.com/tohfacreations"
                 },
                 {
-                    "name": "Gifts",
-                    "href": "/gifts"
-                },
-                {
-                    "name": "Contact",
-                    "href": "/contact"
+                    "platform": "Twitter",
+                    "link": "https://twitter.com/tohfacreations"
                 }
-            ]
+            ],
+            "copyright": "&copy; 2025 The Tohfa Creations. All rights reserved."
         }
     };
     
