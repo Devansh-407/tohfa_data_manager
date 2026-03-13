@@ -33,8 +33,6 @@ const formFields = {
                 { name: 'id', type: 'text', label: 'Product ID', example: '1' },
                 { name: 'name', type: 'text', label: 'Product Name', example: 'Vintage Rose Jewelry Box' },
                 { name: 'description', type: 'textarea', label: 'Description', example: 'Handcrafted wooden jewelry box with intricate rose patterns and velvet interior.' },
-                { name: 'price', type: 'number', label: 'Price (₹)', example: '7499' },
-                { name: 'originalPrice', type: 'number', label: 'Original Price (₹)', example: '9999' },
                 { name: 'images', type: 'text', label: 'Images (comma separated)', example: '/vintage-wooden-jewelry-box-with-rose-patterns.jpg, /vintage-wooden-jewelry-box-side-view.jpg, /vintage-wooden-jewelry-box-open-view.jpg' },
                 { name: 'gif', type: 'text', label: 'GIF URL', example: '' },
                 { name: 'video', type: 'text', label: 'Video URL', example: '' },
@@ -44,7 +42,7 @@ const formFields = {
                 { name: 'reviewCount', type: 'number', label: 'Review Count', example: '127' },
                 { name: 'customizationLevel', type: 'select', label: 'Customization Level', options: ['basic', 'standard', 'premium'], example: 'premium' },
                 { name: 'inStock', type: 'checkbox', label: 'In Stock', example: 'true' },
-                { name: 'sizes', type: 'array', label: 'Sizes', itemFields: [
+                { name: 'sizes', type: 'array', label: 'Product Sizes & Pricing', itemFields: [
                     { name: 'id', type: 'text', label: 'Size ID', example: 'small' },
                     { name: 'name', type: 'text', label: 'Size Name', example: 'Small' },
                     { name: 'price', type: 'number', label: 'Price (₹)', example: '5499' },
@@ -212,8 +210,6 @@ const templates = {
                 "id": "1",
                 "name": "Vintage Rose Jewelry Box",
                 "description": "Handcrafted wooden jewelry box with intricate rose patterns and velvet interior.",
-                "price": 7499,
-                "originalPrice": 9999,
                 "images": [
                     "/vintage-wooden-jewelry-box-with-rose-patterns.jpg",
                     "/vintage-wooden-jewelry-box-side-view.jpg",
@@ -1096,8 +1092,6 @@ function getExampleData(type) {
                     "id": "1",
                     "name": "Vintage Rose Jewelry Box",
                     "description": "Handcrafted wooden jewelry box with intricate rose patterns and velvet interior.",
-                    "price": 7499,
-                    "originalPrice": 9999,
                     "images": [
                         "/vintage-wooden-jewelry-box-with-rose-patterns.jpg",
                         "/vintage-wooden-jewelry-box-side-view.jpg",
