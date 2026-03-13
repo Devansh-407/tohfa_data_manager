@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tohfa Data Manager</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            color: #6b21a8;
+            font-size: 24px;
+        }
+        
+        .btn {
+            background: #6b21a8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+        
+        .btn:hover {
+            background: #581c87;
+        }
+        
+        .btn-secondary {
+            background: #e5e7eb;
+            color: #374151;
+        }
+        
+        .btn-secondary:hover {
+            background: #d1d5db;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .products-list {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .product-card {
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .product-card:hover {
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .product-card h3 {
+            color: #1f2937;
+            margin-bottom: 8px;
+        }
+        
+        .product-card p {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .product-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .price {
+            font-weight: bold;
+            color: #059669;
+        }
+        
+        .badge {
+            background: #6b21a8;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        
+        .badge-success {
+            background: #059669;
+        }
+        
+        .badge-danger {
+            background: #dc2626;
+        }
+        
+        .editor {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #374151;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #6b21a8;
+            box-shadow: 0 0 0 3px rgba(107, 33, 168, 0.1);
+        }
+        
+        .size-variant {
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .size-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .size-fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-delete {
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .btn-delete:hover {
+            background: #b91c1c;
+        }
+        
+        .btn-add {
+            background: #059669;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .btn-add:hover {
+            background: #047857;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Tohfa Data Manager</h1>
+            <div>
+                <button class="btn btn-secondary" onclick="exportToJSON()">Export to JSON</button>
+                <button class="btn" onclick="addNewProduct()">Add Product</button>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="products-list">
+                <h2>Products</h2>
+                <div id="productsContainer"></div>
+            </div>
+            
+            <div class="editor" id="editor">
+                <h2>Product Editor</h2>
+                <div id="editorContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let products = [];
+        let editingProduct = null;
+        
+        // Load products from localStorage or use default
+        function loadProducts() {
+            const saved = localStorage.getItem('tohfaProducts');
+            if (saved) {
+                products = JSON.parse(saved);
+            } else {
+                // Load default products from your structure
+                products = [
+                    {
+                        "id": "1",
+                        "name": "Vintage Rose Jewelry Box",
+                        "description": "Handcrafted wooden jewelry box with intricate rose patterns and velvet interior.",
+                        "price": 7499,
+                        "originalPrice": 9999,
+                        "images": [
+                            "/vintage-wooden-jewelry-box-with-rose-patterns.jpg",
+                            "/vintage-wooden-jewelry-box-side-view.jpg",
+                            "/vintage-wooden-jewelry-box-open-view.jpg"
+                        ],
+                        "gif": "",
+                        "video": "",
+                        "category": "gift-box",
+                        "occasion": "anniversary",
+                        "rating": 4.8,
+                        "reviewCount": 127,
+                        "customizationLevel": "premium",
+                        "inStock": true,
+                        "sizes": [
+                            {
+                                "id": "small",
+                                "name": "Small",
+                                "price": 5499,
+                                "originalPrice": 6999,
+                                "inStock": true,
+                                "description": "Perfect for small jewelry items (6 x 4 x 3 inches)"
+                            },
+                            {
+                                "id": "medium",
+                                "name": "Medium",
+                                "price": 7499,
+                                "originalPrice": 9999,
+                                "inStock": true,
+                                "description": "Ideal for most jewelry collections (8 x 6 x 4 inches)"
+                            },
+                            {
+                                "id": "large",
+                                "name": "Large",
+                                "price": 9999,
+                                "originalPrice": 12999,
+                                "inStock": true,
+                                "description": "Spacious for extensive collections (10 x 8 x 6 inches)"
+                            }
+                        ],
+                        "specifications": {
+                            "material": "Premium Wood with Velvet Interior",
+                            "size": "8 x 6 x 4 inches",
+                            "weight": "500 grams",
+                            "color": "Natural Wood Finish with Red Roses"
+                        },
+                        "shipping": {
+                            "delivery": "5-7 business days",
+                            "packaging": "Premium gift box included",
+                            "shippingCost": "Free shipping above ₹999"
+                        },
+                        "careInstructions": "Wipe with dry cloth only. Keep away from direct sunlight and moisture. Use wood polish occasionally to maintain shine.",
+                        "features": [
+                            "Handcrafted by skilled artisans",
+                            "Intricate rose pattern carving",
+                            "Soft velvet interior lining",
+                            "Brass hinges and clasp",
+                            "Personalization available",
+                            "Gift wrapping included"
+                        ]
+                    }
+                ];
+            }
+            renderProducts();
+        }
+        
+        function renderProducts() {
+            const container = document.getElementById('productsContainer');
+            container.innerHTML = '';
+            
+            products.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.onclick = () => editProduct(product);
+                
+                const price = product.sizes && product.sizes.length > 0 ? 
+                    `₹${Math.min(...product.sizes.map(s => s.price)).toLocaleString('en-IN')} - ₹${Math.max(...product.sizes.map(s => s.price)).toLocaleString('en-IN')}` :
+                    `₹${product.price.toLocaleString('en-IN')}`;
+                
+                const stockBadge = product.inStock ? 
+                    '<span class="badge badge-success">In Stock</span>' : 
+                    '<span class="badge badge-danger">Out of Stock</span>';
+                
+                const sizeBadge = product.sizes && product.sizes.length > 0 ? 
+                    `<span class="badge">${product.sizes.length} sizes</span>` : '';
+                
+                card.innerHTML = `
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p>${product.category}</p>
+                    </div>
+                    <div class="product-info">
+                        <span class="price">${price}</span>
+                        ${stockBadge}
+                    </div>
+                    ${sizeBadge}
+                `;
+                
+                container.appendChild(card);
+            });
+        }
+        
+        function editProduct(product) {
+            editingProduct = product;
+            renderEditor();
+            document.getElementById('editor').classList.remove('hidden');
+        }
+        
+        function renderEditor() {
+            const container = document.getElementById('editorContent');
+            
+            if (!editingProduct) {
+                container.innerHTML = '<p>Select a product to edit</p>';
+                return;
+            }
+            
+            const sizesHtml = editingProduct.sizes ? editingProduct.sizes.map((size, index) => `
+                <div class="size-variant">
+                    <div class="size-header">
+                        <h4>Size Variant ${index + 1}</h4>
+                        <button class="btn-delete" onclick="deleteSize('${size.id}')">Delete</button>
+                    </div>
+                    <div class="size-fields">
+                        <input type="text" class="form-control" placeholder="Size Name" value="${size.name}" onchange="updateSize('${size.id}', 'name', this.value)">
+                        <input type="number" class="form-control" placeholder="Price" value="${size.price}" onchange="updateSize('${size.id}', 'price', parseInt(this.value))">
+                    </div>
+                    <input type="text" class="form-control" placeholder="Description" value="${size.description || ''}" onchange="updateSize('${size.id}', 'description', this.value)">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="stock_${size.id}" ${size.inStock ? 'checked' : ''} onchange="updateSize('${size.id}', 'inStock', this.checked)">
+                        <label for="stock_${size.id}">In Stock</label>
+                    </div>
+                </div>
+            `).join('') : '<p>No size variants added yet.</p>';
+            
+            container.innerHTML = `
+                <div class="form-group">
+                    <label>Product Name</label>
+                    <input type="text" class="form-control" value="${editingProduct.name}" onchange="updateProduct('name', this.value)">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="form-control" rows="3" onchange="updateProduct('description', this.value)">${editingProduct.description}</textarea>
+                </div>
+                <div class="form-group">
+                    <label>Base Price</label>
+                    <input type="number" class="form-control" value="${editingProduct.price}" onchange="updateProduct('price', parseInt(this.value))">
+                </div>
+                <div class="form-group">
+                    <label>Original Price</label>
+                    <input type="number" class="form-control" value="${editingProduct.originalPrice || ''}" onchange="updateProduct('originalPrice', this.value ? parseInt(this.value) : null)">
+                </div>
+                
+                <h3>Size Variants</h3>
+                <button class="btn-add" onclick="addSize()">Add Size Variant</button>
+                <div style="margin-top: 15px;">
+                    ${sizesHtml}
+                </div>
+            `;
+        }
+        
+        function updateProduct(field, value) {
+            if (!editingProduct) return;
+            editingProduct[field] = value;
+            saveProducts();
+            renderProducts();
+        }
+        
+        function addSize() {
+            if (!editingProduct) return;
+            
+            if (!editingProduct.sizes) {
+                editingProduct.sizes = [];
+            }
+            
+            const newSize = {
+                id: 'size_' + Date.now(),
+                name: 'New Size',
+                price: 0,
+                inStock: true,
+                description: 'Size description'
+            };
+            
+            editingProduct.sizes.push(newSize);
+            saveProducts();
+            renderEditor();
+        }
+        
+        function updateSize(sizeId, field, value) {
+            if (!editingProduct || !editingProduct.sizes) return;
+            
+            const size = editingProduct.sizes.find(s => s.id === sizeId);
+            if (size) {
+                size[field] = value;
+                saveProducts();
+                renderProducts();
+            }
+        }
+        
+        function deleteSize(sizeId) {
+            if (!editingProduct || !editingProduct.sizes) return;
+            
+            editingProduct.sizes = editingProduct.sizes.filter(s => s.id !== sizeId);
+            saveProducts();
+            renderEditor();
+        }
+        
+        function saveProducts() {
+            localStorage.setItem('tohfaProducts', JSON.stringify(products));
+        }
+        
+        function exportToJSON() {
+            const dataStr = JSON.stringify({ products }, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = 'products.json';
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+        }
+        
+        function addNewProduct() {
+            const newProduct = {
+                id: Date.now().toString(),
+                name: 'New Product',
+                description: 'Product description',
+                price: 0,
+                category: 'gift-box',
+                occasion: 'anniversary',
+                rating: 5,
+                reviewCount: 0,
+                customizationLevel: 'basic',
+                inStock: true,
+                sizes: []
+            };
+            
+            products.push(newProduct);
+            saveProducts();
+            renderProducts();
+            editProduct(newProduct);
+        }
+        
+        // Initialize on load
+        loadProducts();
+    </script>
+</body>
+</html>

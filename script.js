@@ -44,6 +44,14 @@ const formFields = {
                 { name: 'reviewCount', type: 'number', label: 'Review Count', example: '127' },
                 { name: 'customizationLevel', type: 'select', label: 'Customization Level', options: ['basic', 'standard', 'premium'], example: 'premium' },
                 { name: 'inStock', type: 'checkbox', label: 'In Stock', example: 'true' },
+                { name: 'sizes', type: 'array', label: 'Sizes', itemFields: [
+                    { name: 'id', type: 'text', label: 'Size ID', example: 'small' },
+                    { name: 'name', type: 'text', label: 'Size Name', example: 'Small' },
+                    { name: 'price', type: 'number', label: 'Price (₹)', example: '5499' },
+                    { name: 'originalPrice', type: 'number', label: 'Original Price (₹)', example: '6999' },
+                    { name: 'inStock', type: 'checkbox', label: 'In Stock', example: 'true' },
+                    { name: 'description', type: 'text', label: 'Size Description', example: 'Perfect for small jewelry items (6 x 4 x 3 inches)' }
+                ]},
                 { name: 'specifications.material', type: 'text', label: 'Material', example: 'Premium Wood with Velvet Interior' },
                 { name: 'specifications.size', type: 'text', label: 'Size', example: '8 x 6 x 4 inches' },
                 { name: 'specifications.weight', type: 'text', label: 'Weight', example: '500 grams' },
@@ -219,6 +227,32 @@ const templates = {
                 "reviewCount": 127,
                 "customizationLevel": "premium",
                 "inStock": true,
+                "sizes": [
+                    {
+                        "id": "small",
+                        "name": "Small",
+                        "price": 5499,
+                        "originalPrice": 6999,
+                        "inStock": true,
+                        "description": "Perfect for small jewelry items (6 x 4 x 3 inches)"
+                    },
+                    {
+                        "id": "medium",
+                        "name": "Medium",
+                        "price": 7499,
+                        "originalPrice": 9999,
+                        "inStock": true,
+                        "description": "Ideal for most jewelry collections (8 x 6 x 4 inches)"
+                    },
+                    {
+                        "id": "large",
+                        "name": "Large",
+                        "price": 9999,
+                        "originalPrice": 12999,
+                        "inStock": true,
+                        "description": "Spacious for extensive collections (10 x 8 x 6 inches)"
+                    }
+                ],
                 "specifications": {
                     "material": "Premium Wood with Velvet Interior",
                     "size": "8 x 6 x 4 inches",
@@ -1077,6 +1111,32 @@ function getExampleData(type) {
                     "reviewCount": 127,
                     "customizationLevel": "premium",
                     "inStock": true,
+                    "sizes": [
+                        {
+                            "id": "small",
+                            "name": "Small",
+                            "price": 5499,
+                            "originalPrice": 6999,
+                            "inStock": true,
+                            "description": "Perfect for small jewelry items (6 x 4 x 3 inches)"
+                        },
+                        {
+                            "id": "medium",
+                            "name": "Medium",
+                            "price": 7499,
+                            "originalPrice": 9999,
+                            "inStock": true,
+                            "description": "Ideal for most jewelry collections (8 x 6 x 4 inches)"
+                        },
+                        {
+                            "id": "large",
+                            "name": "Large",
+                            "price": 9999,
+                            "originalPrice": 12999,
+                            "inStock": true,
+                            "description": "Spacious for extensive collections (10 x 8 x 6 inches)"
+                        }
+                    ],
                     "specifications": {
                         "material": "Premium Wood with Velvet Interior",
                         "size": "8 x 6 x 4 inches",
