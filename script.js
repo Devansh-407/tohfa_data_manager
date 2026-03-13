@@ -51,7 +51,6 @@ const formFields = {
                     { name: 'description', type: 'text', label: 'Size Description', example: 'Perfect for small jewelry items (6 x 4 x 3 inches)' }
                 ]},
                 { name: 'specifications.material', type: 'text', label: 'Material', example: 'Premium Wood with Velvet Interior' },
-                { name: 'specifications.size', type: 'text', label: 'Size', example: '8 x 6 x 4 inches' },
                 { name: 'specifications.weight', type: 'text', label: 'Weight', example: '500 grams' },
                 { name: 'specifications.color', type: 'text', label: 'Color', example: 'Natural Wood Finish with Red Roses' },
                 { name: 'shipping.delivery', type: 'text', label: 'Delivery Time', example: '5-7 business days' },
