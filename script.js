@@ -1994,7 +1994,11 @@ function addArrayItem(field, container, index = null) {
 function generateJSONFromForm() {
     // Special handling for products form
     if (currentFormManager === 'products') {
-        return generateProductsJSON();
+        const result = generateProductsJSON();
+        const jsonOutput = document.getElementById('jsonOutput');
+        jsonOutput.value = JSON.stringify(result, null, 2);
+        document.getElementById('jsonOutputSection').style.display = 'block';
+        return;
     }
     
     const config = formFields[currentFormManager];
