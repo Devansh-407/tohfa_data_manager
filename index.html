@@ -36,6 +36,22 @@
 
         <!-- Data Types Grid -->
         <div class="data-grid" id="dataGrid">
+            <div class="data-card" onclick="openFormManager('footer')">
+                <div class="card-icon">
+                    <i class="fas fa-shoe-prints"></i>
+                </div>
+                <div class="card-content">
+                    <h3>Footer</h3>
+                    <p>Manage website footer information and links</p>
+                    <div class="card-footer">
+                        <span class="filename">footer.json</span>
+                        <button class="template-btn" onclick="event.stopPropagation(); downloadTemplate('footer')">
+                            <i class="fas fa-download"></i> Template
+                        </button>
+                    </div>
+                </div>
+            </div>
+
             <div class="data-card" onclick="openFormManager('products')">
                 <div class="card-icon">
                     <i class="fas fa-box"></i>
@@ -52,7 +68,7 @@
                 </div>
             </div>
 
-            <div class="data-card" onclick="openManager('custom-menu')">
+            <div class="data-card" onclick="openFormManager('custom-menu')">
                 <div class="card-icon">
                     <i class="fas fa-palette"></i>
                 </div>
@@ -68,7 +84,7 @@
                 </div>
             </div>
 
-            <div class="data-card" onclick="openManager('about')">
+            <div class="data-card" onclick="openFormManager('about')">
                 <div class="card-icon">
                     <i class="fas fa-file-alt"></i>
                 </div>
@@ -84,7 +100,7 @@
                 </div>
             </div>
 
-            <div class="data-card" onclick="openManager('categories')">
+            <div class="data-card" onclick="openFormManager('categories')">
                 <div class="card-icon">
                     <i class="fas fa-th-large"></i>
                 </div>
@@ -100,7 +116,7 @@
                 </div>
             </div>
 
-            <div class="data-card" onclick="openManager('contact')">
+            <div class="data-card" onclick="openFormManager('contact')">
                 <div class="card-icon">
                     <i class="fas fa-users"></i>
                 </div>
@@ -116,7 +132,7 @@
                 </div>
             </div>
 
-            <div class="data-card" onclick="openManager('occasions')">
+            <div class="data-card" onclick="openFormManager('occasions')">
                 <div class="card-icon">
                     <i class="fas fa-star"></i>
                 </div>
@@ -132,7 +148,7 @@
                 </div>
             </div>
 
-            <div class="data-card" onclick="openManager('testimonials')">
+            <div class="data-card" onclick="openFormManager('testimonials')">
                 <div class="card-icon">
                     <i class="fas fa-chart-line"></i>
                 </div>
@@ -148,7 +164,7 @@
                 </div>
             </div>
 
-            <div class="data-card" onclick="openManager('site-config')">
+            <div class="data-card" onclick="openFormManager('site-config')">
                 <div class="card-icon">
                     <i class="fas fa-cog"></i>
                 </div>
@@ -164,21 +180,6 @@
                 </div>
             </div>
 
-            <div class="data-card" onclick="openManager('top-selling')">
-                <div class="card-icon">
-                    <i class="fas fa-trophy"></i>
-                </div>
-                <div class="card-content">
-                    <h3>Top Selling</h3>
-                    <p>Manage featured and best-selling products</p>
-                    <div class="card-footer">
-                        <span class="filename">top-selling.json</span>
-                        <button class="template-btn" onclick="event.stopPropagation(); downloadTemplate('top-selling')">
-                            <i class="fas fa-download"></i> Template
-                        </button>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <!-- Manager Section -->

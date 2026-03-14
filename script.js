@@ -1947,41 +1947,62 @@ function addArrayItem(field, container, index = null) {
         
         fieldGroup.appendChild(fieldLabel);
         
-        let input;
-        if (itemField.type === 'textarea') {
-            input = document.createElement('textarea');
-            if (itemField.example) {
-                input.placeholder = itemField.example;
-            }
-        } else if (itemField.type === 'select') {
-            input = document.createElement('select');
-            itemField.options.forEach(option => {
-                const optionElement = document.createElement('option');
-                optionElement.value = option;
-                optionElement.textContent = option;
-                if (itemField.example && option === itemField.example) {
-                    optionElement.selected = true;
-                }
-                input.appendChild(optionElement);
-            });
-        } else if (itemField.type === 'checkbox') {
-            input = document.createElement('input');
-            input.type = 'checkbox';
-            if (itemField.example === 'true') {
-                input.checked = true;
-            }
+        // Handle nested arrays
+        if (itemField.type === 'array') {
+            const nestedArrayContainer = document.createElement('div');
+            nestedArrayContainer.id = field.name + '_' + itemIndex + '_' + itemField.name + '_container';
+            nestedArrayContainer.className = 'array-container';
+            
+            // Add one initial nested item
+            addArrayItem(itemField, nestedArrayContainer, 0);
+            
+            // Add button to add more nested items
+            const addNestedButton = document.createElement('button');
+            addNestedButton.className = 'add-item-btn';
+            addNestedButton.textContent = '+ Add ' + itemField.label;
+            addNestedButton.onclick = () => addArrayItem(itemField, nestedArrayContainer);
+            
+            fieldGroup.appendChild(nestedArrayContainer);
+            fieldGroup.appendChild(addNestedButton);
+            itemDiv.appendChild(fieldGroup);
         } else {
-            input = document.createElement('input');
-            input.type = itemField.type;
-            if (itemField.example) {
-                input.placeholder = itemField.example;
+            // Handle regular fields
+            let input;
+            if (itemField.type === 'textarea') {
+                input = document.createElement('textarea');
+                if (itemField.example) {
+                    input.placeholder = itemField.example;
+                }
+            } else if (itemField.type === 'select') {
+                input = document.createElement('select');
+                itemField.options.forEach(option => {
+                    const optionElement = document.createElement('option');
+                    optionElement.value = option;
+                    optionElement.textContent = option;
+                    if (itemField.example && option === itemField.example) {
+                        optionElement.selected = true;
+                    }
+                    input.appendChild(optionElement);
+                });
+            } else if (itemField.type === 'checkbox') {
+                input = document.createElement('input');
+                input.type = 'checkbox';
+                if (itemField.example === 'true') {
+                    input.checked = true;
+                }
+            } else {
+                input = document.createElement('input');
+                input.type = itemField.type;
+                if (itemField.example) {
+                    input.placeholder = itemField.example;
+                }
             }
+            
+            input.name = field.name + '_' + itemIndex + '_' + itemField.name;
+            input.id = field.name + '_' + itemIndex + '_' + itemField.name;
+            fieldGroup.appendChild(input);
+            itemDiv.appendChild(fieldGroup);
         }
-        
-        input.name = field.name + '_' + itemIndex + '_' + itemField.name;
-        input.id = field.name + '_' + itemIndex + '_' + itemField.name;
-        fieldGroup.appendChild(input);
-        itemDiv.appendChild(fieldGroup);
     });
     
     if (index === null) {
@@ -2070,6 +2091,15 @@ function getArrayData(field) {
                 itemData[itemField.name] = parseFloat(value) || 0;
             } else if (itemField.type === 'checkbox') {
                 itemData[itemField.name] = getFieldValue(inputName);
+            } else if (itemField.type === 'array') {
+                // Handle nested arrays
+                const nestedContainer = document.getElementById(inputName + '_container');
+                if (nestedContainer) {
+                    itemData[itemField.name] = getArrayData({
+                        name: inputName,
+                        itemFields: itemField.itemFields
+                    });
+                }
             } else if (itemField.type.includes('text') || itemField.type === 'textarea') {
                 if (itemField.name.includes('.')) {
                     setNestedValue(itemData, itemField.name, value);
