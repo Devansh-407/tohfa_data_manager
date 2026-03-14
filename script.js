@@ -1393,9 +1393,15 @@ function initializeProductManager() {
 }
 
 function validateAndFormatJSON() {
-    const editor = document.getElementById('jsonEditor');
+    // Try to find either jsonOutput (form interface) or jsonEditor (JSON editor interface)
+    const editor = document.getElementById('jsonOutput') || document.getElementById('jsonEditor');
     const errorDiv = document.getElementById('jsonError');
     const successDiv = document.getElementById('jsonSuccess');
+    
+    if (!editor) {
+        console.error('No JSON editor found');
+        return;
+    }
     
     try {
         const jsonData = JSON.parse(editor.value);
@@ -1404,36 +1410,62 @@ function validateAndFormatJSON() {
         editor.value = JSON.stringify(jsonData, null, 2);
         
         // Show success
-        errorDiv.style.display = 'none';
-        successDiv.textContent = '✅ JSON is valid and formatted correctly!';
-        successDiv.style.display = 'block';
-        
-        // Hide success after 3 seconds
-        setTimeout(() => {
-            successDiv.style.display = 'none';
-        }, 3000);
+        if (errorDiv) errorDiv.style.display = 'none';
+        if (successDiv) {
+            successDiv.textContent = '✅ JSON is valid and formatted correctly!';
+            successDiv.style.display = 'block';
+            
+            // Hide success after 3 seconds
+            setTimeout(() => {
+                if (successDiv) successDiv.style.display = 'none';
+            }, 3000);
+        }
         
     } catch (error) {
         // Show error
-        successDiv.style.display = 'none';
-        errorDiv.textContent = '❌ JSON Error: ' + error.message;
-        errorDiv.style.display = 'block';
+        if (successDiv) successDiv.style.display = 'none';
+        if (errorDiv) {
+            errorDiv.textContent = '❌ JSON Error: ' + error.message;
+            errorDiv.style.display = 'block';
+            
+            // Hide error after 5 seconds
+            setTimeout(() => {
+                if (errorDiv) errorDiv.style.display = 'none';
+            }, 5000);
+        }
     }
 }
 
 function resetJSONEditor() {
-    const editor = document.getElementById('jsonEditor');
+    // Try to find either jsonOutput (form interface) or jsonEditor (JSON editor interface)
+    const editor = document.getElementById('jsonOutput') || document.getElementById('jsonEditor');
     const errorDiv = document.getElementById('jsonError');
     const successDiv = document.getElementById('jsonSuccess');
     
-    editor.value = JSON.stringify(templates[currentManager], null, 2);
-    errorDiv.style.display = 'none';
-    successDiv.style.display = 'none';
+    if (!editor) {
+        console.error('No JSON editor found');
+        return;
+    }
+    
+    // Use appropriate template source
+    const templateSource = currentFormManager ? formFields[currentFormManager] : templates[currentManager];
+    const templateData = templates[currentFormManager] || templates[currentManager];
+    
+    editor.value = JSON.stringify(templateData, null, 2);
+    if (errorDiv) errorDiv.style.display = 'none';
+    if (successDiv) successDiv.style.display = 'none';
 }
 
 function downloadJSONFromEditor(filename = null) {
-    const editor = document.getElementById('jsonEditor');
+    // Try to find either jsonOutput (form interface) or jsonEditor (JSON editor interface)
+    const editor = document.getElementById('jsonOutput') || document.getElementById('jsonEditor');
     const errorDiv = document.getElementById('jsonError');
+    const successDiv = document.getElementById('jsonSuccess');
+    
+    if (!editor) {
+        console.error('No JSON editor found');
+        return;
+    }
     
     try {
         const jsonData = JSON.parse(editor.value);
@@ -1442,16 +1474,14 @@ function downloadJSONFromEditor(filename = null) {
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = filename || `${currentManager}.json`;
+        a.download = filename || (currentFormManager || currentManager) + '.json';
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
         
-        // Show success
-        errorDiv.style.display = 'none';
-        const successDiv = document.getElementById('jsonSuccess');
-        successDiv.textContent = `✅ ${filename || currentManager}.json downloaded successfully!`;
+        if (errorDiv) errorDiv.style.display = 'none';
+        successDiv.textContent = `✅ ${filename || (currentFormManager || currentManager)}.json downloaded successfully!`;
         successDiv.style.display = 'block';
         
         setTimeout(() => {
