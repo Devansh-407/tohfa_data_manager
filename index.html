@@ -188,6 +188,53 @@
             </button>
             <div id="managerContent"></div>
         </div>
+
+        <!-- Form Manager Section -->
+        <div class="form-manager-section" id="formManagerSection" style="display: none;">
+            <button class="back-btn" onclick="closeFormManager()">
+                <i class="fas fa-arrow-left"></i> Back to Data Types
+            </button>
+            
+            <div class="form-header">
+                <h2 id="formManagerTitle">Form Manager</h2>
+                <p id="formManagerDescription">Fill in the form fields below</p>
+            </div>
+
+            <div class="form-container" id="formContainer">
+                <!-- Form fields will be dynamically generated here -->
+            </div>
+
+            <div class="form-actions">
+                <button class="btn btn-primary" onclick="generateJSONFromForm()">
+                    <i class="fas fa-magic"></i> Generate JSON
+                </button>
+                <button class="btn btn-secondary" onclick="resetForm()">
+                    <i class="fas fa-undo"></i> Reset Form
+                </button>
+                <button class="btn btn-success" onclick="downloadGeneratedJSON()">
+                    <i class="fas fa-download"></i> Download JSON
+                </button>
+            </div>
+
+            <!-- JSON Output Section -->
+            <div class="json-output-section" id="jsonOutputSection" style="display: none;">
+                <div class="json-header">
+                    <h3>Generated JSON</h3>
+                    <div class="json-actions">
+                        <button class="btn btn-sm" onclick="validateAndFormatJSON()">
+                            <i class="fas fa-check"></i> Validate & Format
+                        </button>
+                        <button class="btn btn-sm" onclick="resetJSONEditor()">
+                            <i class="fas fa-undo"></i> Reset to Template
+                        </button>
+                        <button class="btn btn-sm" onclick="downloadJSONFromEditor()">
+                            <i class="fas fa-download"></i> Download JSON
+                        </button>
+                    </div>
+                </div>
+                <textarea id="jsonOutput" class="json-output" placeholder="Generated JSON will appear here..."></textarea>
+            </div>
+        </div>
     </div>
 
     <!-- Footer -->
