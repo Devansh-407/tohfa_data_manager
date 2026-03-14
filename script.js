@@ -224,24 +224,24 @@ const templates = {
                 "inStock": true,
                 "sizes": [
                     {
-                        "id": "small",
-                        "name": "Small",
+                        "id": "(6 x 4 x 6)",
+                        "name": "(6 x 4 x 6)",
                         "price": 5499,
                         "originalPrice": 6999,
                         "inStock": true,
-                        "description": "Perfect for small jewelry items (6 x 4 x 3 inches)"
+                        "description": "Perfect for small jewelry items (6 x 4 x 6 inches)"
                     },
                     {
-                        "id": "medium",
-                        "name": "Medium",
+                        "id": "(8 x 6 x 4)",
+                        "name": "(8 x 6 x 4)",
                         "price": 7499,
                         "originalPrice": 9999,
                         "inStock": true,
                         "description": "Ideal for most jewelry collections (8 x 6 x 4 inches)"
                     },
                     {
-                        "id": "large",
-                        "name": "Large",
+                        "id": "(10 x 8 x 6)",
+                        "name": "(10 x 8 x 6)",
                         "price": 9999,
                         "originalPrice": 12999,
                         "inStock": true,
@@ -1106,24 +1106,24 @@ function getExampleData(type) {
                     "inStock": true,
                     "sizes": [
                         {
-                            "id": "small",
-                            "name": "Small",
+                            "id": "(6 x 4 x 6)",
+                            "name": "(6 x 4 x 6)",
                             "price": 5499,
                             "originalPrice": 6999,
                             "inStock": true,
-                            "description": "Perfect for small jewelry items (6 x 4 x 3 inches)"
+                            "description": "Perfect for small jewelry items (6 x 4 x 6 inches)"
                         },
                         {
-                            "id": "medium",
-                            "name": "Medium",
+                            "id": "(8 x 6 x 4)",
+                            "name": "(8 x 6 x 4)",
                             "price": 7499,
                             "originalPrice": 9999,
                             "inStock": true,
                             "description": "Ideal for most jewelry collections (8 x 6 x 4 inches)"
                         },
                         {
-                            "id": "large",
-                            "name": "Large",
+                            "id": "(10 x 8 x 6)",
+                            "name": "(10 x 8 x 6)",
                             "price": 9999,
                             "originalPrice": 12999,
                             "inStock": true,
@@ -1769,9 +1769,9 @@ function addProduct(index = null) {
     
     // Add initial sizes for this product
     if (index === 0) {
-        addSize(productIndex, 0); // Small
-        addSize(productIndex, 1); // Medium  
-        addSize(productIndex, 2); // Large
+        addSize(productIndex, 0); // (6 x 4 x 6)
+        addSize(productIndex, 1); // (8 x 6 x 4)  
+        addSize(productIndex, 2); // (10 x 8 x 6)
     }
 }
 
@@ -1789,13 +1789,13 @@ function addSize(productIndex, sizeIndex = null) {
         
         <div class="size-fields-row">
             <div class="form-group size-field">
-                <label>Size ID <span class="field-example">(Example: small)</span></label>
-                <input type="text" name="products[${productIndex}].sizes[${sizeIndexActual}].id" placeholder="small">
+                <label>Size ID <span class="field-example">(Example: (6 x 4 x 6))</span></label>
+                <input type="text" name="products[${productIndex}].sizes[${sizeIndexActual}].id" placeholder="(6 x 4 x 6)">
             </div>
             
             <div class="form-group size-field">
-                <label>Size Name <span class="field-example">(Example: Small)</span></label>
-                <input type="text" name="products[${productIndex}].sizes[${sizeIndexActual}].name" placeholder="Small">
+                <label>Size Name <span class="field-example">(Example: (6 x 4 x 6))</span></label>
+                <input type="text" name="products[${productIndex}].sizes[${sizeIndexActual}].name" placeholder="(6 x 4 x 6)">
             </div>
             
             <div class="form-group size-field">

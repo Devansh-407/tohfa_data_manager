@@ -36,13 +36,13 @@
 
         <!-- Data Types Grid -->
         <div class="data-grid" id="dataGrid">
-            <div class="data-card" onclick="openFormManager('products')">
+            <div class="data-card" onclick="openManager('products')">
                 <div class="card-icon">
-                    <i class="fas fa-gift"></i>
+                    <i class="fas fa-box"></i>
                 </div>
                 <div class="card-content">
                     <h3>Products</h3>
-                    <p>Manage complete product catalog</p>
+                    <p>Manage your product catalog with images, pricing, and details</p>
                     <div class="card-footer">
                         <span class="filename">products.json</span>
                         <button class="template-btn" onclick="event.stopPropagation(); downloadTemplate('products')">
@@ -52,61 +52,29 @@
                 </div>
             </div>
 
-            <div class="data-card" onclick="openFormManager('categories')">
+            <div class="data-card" onclick="openManager('custom-menu')">
                 <div class="card-icon">
-                    <i class="fas fa-th-large"></i>
+                    <i class="fas fa-palette"></i>
                 </div>
                 <div class="card-content">
-                    <h3>Categories</h3>
-                    <p>Manage product categories</p>
+                    <h3>Custom Menu</h3>
+                    <p>Create custom menus for special occasions and seasons</p>
                     <div class="card-footer">
-                        <span class="filename">categories.json</span>
-                        <button class="template-btn" onclick="event.stopPropagation(); downloadTemplate('categories')">
+                        <span class="filename">custom-menu.json</span>
+                        <button class="template-btn" onclick="event.stopPropagation(); downloadTemplate('custom-menu')">
                             <i class="fas fa-download"></i> Template
                         </button>
                     </div>
                 </div>
             </div>
 
-            <div class="data-card" onclick="openFormManager('occasions')">
+            <div class="data-card" onclick="openManager('about')">
                 <div class="card-icon">
-                    <i class="fas fa-calendar-alt"></i>
-                </div>
-                <div class="card-content">
-                    <h3>Occasions</h3>
-                    <p>Manage shopping occasions</p>
-                    <div class="card-footer">
-                        <span class="filename">occasions.json</span>
-                        <button class="template-btn" onclick="event.stopPropagation(); downloadTemplate('occasions')">
-                            <i class="fas fa-download"></i> Template
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="data-card" onclick="openFormManager('testimonials')">
-                <div class="card-icon">
-                    <i class="fas fa-quote-left"></i>
-                </div>
-                <div class="card-content">
-                    <h3>Testimonials</h3>
-                    <p>Manage customer testimonials</p>
-                    <div class="card-footer">
-                        <span class="filename">testimonials.json</span>
-                        <button class="template-btn" onclick="event.stopPropagation(); downloadTemplate('testimonials')">
-                            <i class="fas fa-download"></i> Template
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="data-card" onclick="openFormManager('about')">
-                <div class="card-icon">
-                    <i class="fas fa-info-circle"></i>
+                    <i class="fas fa-file-alt"></i>
                 </div>
                 <div class="card-content">
                     <h3>About</h3>
-                    <p>Manage about page content</p>
+                    <p>Update your company story and information</p>
                     <div class="card-footer">
                         <span class="filename">about.json</span>
                         <button class="template-btn" onclick="event.stopPropagation(); downloadTemplate('about')">
@@ -116,29 +84,29 @@
                 </div>
             </div>
 
-            <div class="data-card" onclick="openFormManager('footer')">
+            <div class="data-card" onclick="openManager('categories')">
                 <div class="card-icon">
-                    <i class="fas fa-footer"></i>
+                    <i class="fas fa-th-large"></i>
                 </div>
                 <div class="card-content">
-                    <h3>Footer</h3>
-                    <p>Manage website footer content</p>
+                    <h3>Categories</h3>
+                    <p>Manage product categories and shop sections</p>
                     <div class="card-footer">
-                        <span class="filename">footer.json</span>
-                        <button class="template-btn" onclick="event.stopPropagation(); downloadTemplate('footer')">
+                        <span class="filename">categories.json</span>
+                        <button class="template-btn" onclick="event.stopPropagation(); downloadTemplate('categories')">
                             <i class="fas fa-download"></i> Template
                         </button>
                     </div>
                 </div>
             </div>
 
-            <div class="data-card" onclick="openFormManager('contact')">
+            <div class="data-card" onclick="openManager('contact')">
                 <div class="card-icon">
-                    <i class="fas fa-envelope"></i>
+                    <i class="fas fa-users"></i>
                 </div>
                 <div class="card-content">
                     <h3>Contact</h3>
-                    <p>Manage contact information</p>
+                    <p>Update contact information and business details</p>
                     <div class="card-footer">
                         <span class="filename">contact.json</span>
                         <button class="template-btn" onclick="event.stopPropagation(); downloadTemplate('contact')">
@@ -148,13 +116,45 @@
                 </div>
             </div>
 
-            <div class="data-card" onclick="openFormManager('site-config')">
+            <div class="data-card" onclick="openManager('occasions')">
                 <div class="card-icon">
-                    <i class="fas fa-cogs"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="card-content">
+                    <h3>Occasions</h3>
+                    <p>Manage special occasions and events</p>
+                    <div class="card-footer">
+                        <span class="filename">occasions.json</span>
+                        <button class="template-btn" onclick="event.stopPropagation(); downloadTemplate('occasions')">
+                            <i class="fas fa-download"></i> Template
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-card" onclick="openManager('testimonials')">
+                <div class="card-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="card-content">
+                    <h3>Testimonials</h3>
+                    <p>Add customer reviews and testimonials</p>
+                    <div class="card-footer">
+                        <span class="filename">testimonials.json</span>
+                        <button class="template-btn" onclick="event.stopPropagation(); downloadTemplate('testimonials')">
+                            <i class="fas fa-download"></i> Template
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-card" onclick="openManager('site-config')">
+                <div class="card-icon">
+                    <i class="fas fa-cog"></i>
                 </div>
                 <div class="card-content">
                     <h3>Site Config</h3>
-                    <p>Manage website configuration</p>
+                    <p>Update website configuration and settings</p>
                     <div class="card-footer">
                         <span class="filename">site-config.json</span>
                         <button class="template-btn" onclick="event.stopPropagation(); downloadTemplate('site-config')">
@@ -164,16 +164,16 @@
                 </div>
             </div>
 
-            <div class="data-card" onclick="openFormManager('custom-menu')">
+            <div class="data-card" onclick="openManager('top-selling')">
                 <div class="card-icon">
-                    <i class="fas fa-utensils"></i>
+                    <i class="fas fa-trophy"></i>
                 </div>
                 <div class="card-content">
-                    <h3>Custom Menu</h3>
-                    <p>Manage custom menus for occasions</p>
+                    <h3>Top Selling</h3>
+                    <p>Manage featured and best-selling products</p>
                     <div class="card-footer">
-                        <span class="filename">custom-menu.json</span>
-                        <button class="template-btn" onclick="event.stopPropagation(); downloadTemplate('custom-menu')">
+                        <span class="filename">top-selling.json</span>
+                        <button class="template-btn" onclick="event.stopPropagation(); downloadTemplate('top-selling')">
                             <i class="fas fa-download"></i> Template
                         </button>
                     </div>
@@ -187,53 +187,6 @@
                 <i class="fas fa-arrow-left"></i> Back to Data Types
             </button>
             <div id="managerContent"></div>
-        </div>
-
-        <!-- Form-based Manager Section -->
-        <div class="form-manager-section" id="formManagerSection" style="display: none;">
-            <button class="back-btn" onclick="closeFormManager()">
-                <i class="fas fa-arrow-left"></i> Back to Data Types
-            </button>
-            
-            <div class="form-header">
-                <h2 id="formManagerTitle">Manage Data</h2>
-                <p id="formManagerDescription">Fill in the form fields below</p>
-            </div>
-
-            <div class="form-container" id="formContainer">
-                <!-- Form fields will be dynamically generated here -->
-            </div>
-
-            <div class="form-actions">
-                <button class="btn btn-primary" onclick="generateJSONFromForm()">
-                    <i class="fas fa-magic"></i> Generate JSON
-                </button>
-                <button class="btn btn-secondary" onclick="resetForm()">
-                    <i class="fas fa-undo"></i> Reset Form
-                </button>
-                <button class="btn btn-success" onclick="downloadGeneratedJSON()">
-                    <i class="fas fa-download"></i> Download JSON
-                </button>
-            </div>
-
-            <!-- JSON Output Section -->
-            <div class="json-output-section" id="jsonOutputSection" style="display: none;">
-                <div class="json-header">
-                    <h3>Generated JSON</h3>
-                    <div class="json-actions">
-                        <button class="btn btn-sm" onclick="validateAndFormatJSON()">
-                            <i class="fas fa-check"></i> Validate & Format
-                        </button>
-                        <button class="btn btn-sm" onclick="resetJSONEditor()">
-                            <i class="fas fa-undo"></i> Reset to Template
-                        </button>
-                        <button class="btn btn-sm" onclick="downloadJSONFromEditor()">
-                            <i class="fas fa-download"></i> Download JSON
-                        </button>
-                    </div>
-                </div>
-                <textarea id="jsonOutput" class="json-output" placeholder="Generated JSON will appear here..."></textarea>
-            </div>
         </div>
     </div>
 
