@@ -835,15 +835,26 @@ function closeManager() {
 // Download template
 function downloadTemplate(type) {
     const template = templates[type];
-    const blob = new Blob([JSON.stringify(template, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${type}.json`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    
+    if (!template) {
+        alert('Template not found for: ' + type);
+        return;
+    }
+    
+    try {
+        const blob = new Blob([JSON.stringify(template, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${type}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    } catch (error) {
+        alert('Error downloading template: ' + error.message);
+        console.error('Template download error:', error);
+    }
 }
 
 // Product Manager HTML
@@ -1582,16 +1593,42 @@ function downloadCustomMenus() {
 
 // Form-based Manager Functions
 function openFormManager(type) {
-    currentFormManager = type;
-    document.getElementById('dataGrid').style.display = 'none';
-    document.getElementById('formManagerSection').style.display = 'block';
-    
     const config = formFields[type];
-    document.getElementById('formManagerTitle').textContent = config.title;
-    document.getElementById('formManagerDescription').textContent = config.description;
+    
+    if (!config) {
+        alert('Form configuration not found for: ' + type);
+        return;
+    }
+    
+    currentFormManager = type;
+    
+    const dataGrid = document.getElementById('dataGrid');
+    const formManagerSection = document.getElementById('formManagerSection');
+    const formManagerTitle = document.getElementById('formManagerTitle');
+    const formManagerDescription = document.getElementById('formManagerDescription');
+    const jsonOutputSection = document.getElementById('jsonOutputSection');
+    
+    if (!dataGrid || !formManagerSection || !formManagerTitle || !formManagerDescription) {
+        console.error('Required form manager elements not found');
+        return;
+    }
+    
+    dataGrid.style.display = 'none';
+    formManagerSection.style.display = 'block';
+    
+    formManagerTitle.textContent = config.title || 'Form Manager';
+    formManagerDescription.textContent = config.description || 'Fill in the form fields below';
     
     generateFormFields(config.fields);
-    document.getElementById('jsonOutputSection').style.display = 'none';
+    if (jsonOutputSection) {
+        jsonOutputSection.style.display = 'none';
+    }
+    
+    // Clear any existing messages
+    const errorDiv = document.getElementById('jsonError');
+    const successDiv = document.getElementById('jsonSuccess');
+    if (errorDiv) errorDiv.style.display = 'none';
+    if (successDiv) successDiv.style.display = 'none';
 }
 
 function closeFormManager() {
@@ -1621,6 +1658,11 @@ function generateFormFields(fields) {
 
 function generateCustomProductForm() {
     const container = document.getElementById('formContainer');
+    
+    if (!container) {
+        console.error('Form container not found');
+        return;
+    }
     
     // Top Selling Section
     const topSellingSection = document.createElement('div');
@@ -1658,6 +1700,12 @@ function generateCustomProductForm() {
 
 function addProduct(index = null) {
     const container = document.getElementById('products_container');
+    
+    if (!container) {
+        console.error('Products container not found');
+        return;
+    }
+    
     const productIndex = index !== null ? index : container.children.length;
     
     const productDiv = document.createElement('div');
@@ -1807,6 +1855,12 @@ function addProduct(index = null) {
 
 function addSize(productIndex, sizeIndex = null) {
     const container = document.getElementById(`sizes_${productIndex}_container`);
+    
+    if (!container) {
+        console.error(`Sizes container not found for product ${productIndex}`);
+        return;
+    }
+    
     const sizeIndexActual = sizeIndex !== null ? sizeIndex : container.children.length;
     
     const sizeDiv = document.createElement('div');
@@ -2173,34 +2227,82 @@ function getFieldValue(fieldName) {
 
 function resetForm() {
     const container = document.getElementById('formContainer');
+    const config = formFields[currentFormManager];
+    
+    if (!container) {
+        console.error('Form container not found');
+        return;
+    }
+    
     container.innerHTML = '';
     
-    const config = formFields[currentFormManager];
-    generateFormFields(config.fields);
-    document.getElementById('jsonOutputSection').style.display = 'none';
+    if (config && config.fields) {
+        generateFormFields(config.fields);
+    } else {
+        console.error('Form configuration not found for:', currentFormManager);
+    }
+    
+    const jsonOutputSection = document.getElementById('jsonOutputSection');
+    if (jsonOutputSection) {
+        jsonOutputSection.style.display = 'none';
+    }
+    
+    // Clear any error/success messages
+    const errorDiv = document.getElementById('jsonError');
+    const successDiv = document.getElementById('jsonSuccess');
+    if (errorDiv) errorDiv.style.display = 'none';
+    if (successDiv) successDiv.style.display = 'none';
 }
 
 function downloadGeneratedJSON() {
     const jsonOutput = document.getElementById('jsonOutput');
-    const jsonData = JSON.parse(jsonOutput.value);
     
-    const blob = new Blob([JSON.stringify(jsonData, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = currentFormManager + '.json';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    if (!jsonOutput || !jsonOutput.value.trim()) {
+        alert('Please generate JSON first before downloading!');
+        return;
+    }
+    
+    try {
+        const jsonData = JSON.parse(jsonOutput.value);
+        
+        const blob = new Blob([JSON.stringify(jsonData, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = (currentFormManager || 'data') + '.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        // Show success message
+        const successDiv = document.getElementById('jsonSuccess');
+        if (successDiv) {
+            successDiv.textContent = `✅ ${(currentFormManager || 'data')}.json downloaded successfully!`;
+            successDiv.style.display = 'block';
+            setTimeout(() => {
+                successDiv.style.display = 'none';
+            }, 3000);
+        }
+        
+    } catch (error) {
+        const errorDiv = document.getElementById('jsonError');
+        if (errorDiv) {
+            errorDiv.textContent = '❌ Please fix JSON errors before downloading: ' + error.message;
+            errorDiv.style.display = 'block';
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+        }
+    }
 }
 
 function generateProductsJSON() {
     const result = {
         topSelling: {
-            title: getFieldValue('topSelling.title'),
-            description: getFieldValue('topSelling.description'),
-            productIds: getFieldValue('topSelling.productIds').split(',').map(id => id.trim()).filter(id => id)
+            title: getFieldValue('topSelling.title') || '',
+            description: getFieldValue('topSelling.description') || '',
+            productIds: (getFieldValue('topSelling.productIds') || '').split(',').map(id => id.trim()).filter(id => id)
         },
         products: []
     };
@@ -2210,31 +2312,31 @@ function generateProductsJSON() {
     
     productContainers.forEach((productDiv, productIndex) => {
         const product = {
-            id: getFieldValue(`products[${productIndex}].id`),
-            name: getFieldValue(`products[${productIndex}].name`),
-            description: getFieldValue(`products[${productIndex}].description`),
-            images: getFieldValue(`products[${productIndex}].images`).split(',').map(img => img.trim()).filter(img => img),
-            gif: getFieldValue(`products[${productIndex}].gif`),
-            video: getFieldValue(`products[${productIndex}].video`),
-            category: getFieldValue(`products[${productIndex}].category`),
-            occasion: getFieldValue(`products[${productIndex}].occasion`),
+            id: getFieldValue(`products[${productIndex}].id`) || '',
+            name: getFieldValue(`products[${productIndex}].name`) || '',
+            description: getFieldValue(`products[${productIndex}].description`) || '',
+            images: (getFieldValue(`products[${productIndex}].images`) || '').split(',').map(img => img.trim()).filter(img => img),
+            gif: getFieldValue(`products[${productIndex}].gif`) || '',
+            video: getFieldValue(`products[${productIndex}].video`) || '',
+            category: getFieldValue(`products[${productIndex}].category`) || '',
+            occasion: getFieldValue(`products[${productIndex}].occasion`) || '',
             rating: parseFloat(getFieldValue(`products[${productIndex}].rating`)) || 0,
             reviewCount: parseInt(getFieldValue(`products[${productIndex}].reviewCount`)) || 0,
-            customizationLevel: getFieldValue(`products[${productIndex}].customizationLevel`),
-            inStock: getFieldValue(`products[${productIndex}].inStock`),
+            customizationLevel: getFieldValue(`products[${productIndex}].customizationLevel`) || '',
+            inStock: getFieldValue(`products[${productIndex}].inStock`) || false,
             sizes: [],
             specifications: {
-                material: getFieldValue(`products[${productIndex}].specifications.material`),
-                weight: getFieldValue(`products[${productIndex}].specifications.weight`),
-                color: getFieldValue(`products[${productIndex}].specifications.color`)
+                material: getFieldValue(`products[${productIndex}].specifications.material`) || '',
+                weight: getFieldValue(`products[${productIndex}].specifications.weight`) || '',
+                color: getFieldValue(`products[${productIndex}].specifications.color`) || ''
             },
             shipping: {
-                delivery: getFieldValue(`products[${productIndex}].shipping.delivery`),
-                packaging: getFieldValue(`products[${productIndex}].shipping.packaging`),
-                shippingCost: getFieldValue(`products[${productIndex}].shipping.shippingCost`)
+                delivery: getFieldValue(`products[${productIndex}].shipping.delivery`) || '',
+                packaging: getFieldValue(`products[${productIndex}].shipping.packaging`) || '',
+                shippingCost: getFieldValue(`products[${productIndex}].shipping.shippingCost`) || ''
             },
-            careInstructions: getFieldValue(`products[${productIndex}].careInstructions`),
-            features: getFieldValue(`products[${productIndex}].features`).split(',').map(feature => feature.trim()).filter(feature => feature)
+            careInstructions: getFieldValue(`products[${productIndex}].careInstructions`) || '',
+            features: (getFieldValue(`products[${productIndex}].features`) || '').split(',').map(feature => feature.trim()).filter(feature => feature)
         };
         
         // Get all sizes for this product
@@ -2244,12 +2346,12 @@ function generateProductsJSON() {
             
             sizeDivs.forEach((sizeDiv, sizeIndex) => {
                 const size = {
-                    id: getFieldValue(`products[${productIndex}].sizes[${sizeIndex}].id`),
-                    name: getFieldValue(`products[${productIndex}].sizes[${sizeIndex}].name`),
+                    id: getFieldValue(`products[${productIndex}].sizes[${sizeIndex}].id`) || '',
+                    name: getFieldValue(`products[${productIndex}].sizes[${sizeIndex}].name`) || '',
                     price: parseFloat(getFieldValue(`products[${productIndex}].sizes[${sizeIndex}].price`)) || 0,
                     originalPrice: parseFloat(getFieldValue(`products[${productIndex}].sizes[${sizeIndex}].originalPrice`)) || 0,
-                    inStock: getFieldValue(`products[${productIndex}].sizes[${sizeIndex}].inStock`),
-                    description: getFieldValue(`products[${productIndex}].sizes[${sizeIndex}].description`)
+                    inStock: getFieldValue(`products[${productIndex}].sizes[${sizeIndex}].inStock`) || false,
+                    description: getFieldValue(`products[${productIndex}].sizes[${sizeIndex}].description`) || ''
                 };
                 product.sizes.push(size);
             });
