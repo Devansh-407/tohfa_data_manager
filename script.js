@@ -1574,6 +1574,12 @@ function generateFormFields(fields) {
     const container = document.getElementById('formContainer');
     container.innerHTML = '';
     
+    // Special handling for products form
+    if (currentFormManager === 'products') {
+        generateCustomProductForm();
+        return;
+    }
+    
     fields.forEach(field => {
         if (field.type === 'array') {
             generateArrayField(field);
@@ -1581,6 +1587,241 @@ function generateFormFields(fields) {
             generateSimpleField(field);
         }
     });
+}
+
+function generateCustomProductForm() {
+    const container = document.getElementById('formContainer');
+    
+    // Top Selling Section
+    const topSellingSection = document.createElement('div');
+    topSellingSection.innerHTML = `
+        <h3>Top Selling Products</h3>
+        <div class="form-group">
+            <label>Top Selling Title <span class="field-example">(Example: Top Selling Gifts)</span></label>
+            <input type="text" id="topSelling.title" placeholder="Top Selling Gifts">
+        </div>
+        <div class="form-group">
+            <label>Top Selling Description <span class="field-example">(Example: Discover our most loved and highly-rated gifts...)</span></label>
+            <textarea id="topSelling.description" placeholder="Discover your most loved and highly-rated gifts..."></textarea>
+        </div>
+        <div class="form-group">
+            <label>Top Selling Product IDs (comma separated) <span class="field-example">(Example: 1, 2, 3, 4, 5, 6, 7, 8)</span></label>
+            <input type="text" id="topSelling.productIds" placeholder="1, 2, 3, 4, 5, 6, 7, 8">
+        </div>
+    `;
+    container.appendChild(topSellingSection);
+    
+    // Products Section
+    const productsSection = document.createElement('div');
+    productsSection.innerHTML = `
+        <h3>Products</h3>
+        <div id="products_container" class="array-container">
+            <!-- Products will be added here -->
+        </div>
+        <button class="add-item-btn" onclick="addProduct()">+ Add Product</button>
+    `;
+    container.appendChild(productsSection);
+    
+    // Add one initial product
+    addProduct(0);
+}
+
+function addProduct(index = null) {
+    const container = document.getElementById('products_container');
+    const productIndex = index !== null ? index : container.children.length;
+    
+    const productDiv = document.createElement('div');
+    productDiv.className = 'array-item';
+    productDiv.innerHTML = `
+        <div class="array-item-header">
+            <span class="array-item-title">Product ${productIndex + 1}</span>
+            <button class="remove-item-btn" onclick="this.parentElement.parentElement.remove()">×</button>
+        </div>
+        
+        <div class="form-group">
+            <label>Product ID <span class="field-example">(Example: 1)</span></label>
+            <input type="text" name="products[${productIndex}].id" placeholder="1">
+        </div>
+        
+        <div class="form-group">
+            <label>Product Name <span class="field-example">(Example: Vintage Rose Jewelry Box)</span></label>
+            <input type="text" name="products[${productIndex}].name" placeholder="Vintage Rose Jewelry Box">
+        </div>
+        
+        <div class="form-group">
+            <label>Description <span class="field-example">(Example: Handcrafted wooden jewelry box...)</span></label>
+            <textarea name="products[${productIndex}].description" placeholder="Handcrafted wooden jewelry box with intricate rose patterns..."></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label>Images (comma separated) <span class="field-example">(Example: /image1.jpg, /image2.jpg)</span></label>
+            <input type="text" name="products[${productIndex}].images" placeholder="/vintage-wooden-jewelry-box-with-rose-patterns.jpg, /vintage-wooden-jewelry-box-side-view.jpg">
+        </div>
+        
+        <div class="form-group">
+            <label>GIF URL <span class="field-example">(Example: )</span></label>
+            <input type="text" name="products[${productIndex}].gif" placeholder="">
+        </div>
+        
+        <div class="form-group">
+            <label>Video URL <span class="field-example">(Example: )</span></label>
+            <input type="text" name="products[${productIndex}].video" placeholder="">
+        </div>
+        
+        <div class="form-group">
+            <label>Category</label>
+            <select name="products[${productIndex}].category">
+                <option value="gift-hamper">Gift Hamper</option>
+                <option value="gift-box" selected>Gift Box</option>
+                <option value="bouquet">Bouquet</option>
+                <option value="miniature">Miniature</option>
+                <option value="frame">Frame</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label>Occasion</label>
+            <select name="products[${productIndex}].occasion">
+                <option value="anniversary" selected>Anniversary</option>
+                <option value="birthday">Birthday</option>
+                <option value="proposal">Proposal</option>
+                <option value="wedding">Wedding</option>
+                <option value="graduation">Graduation</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label>Rating (1-5) <span class="field-example">(Example: 4.8)</span></label>
+            <input type="number" name="products[${productIndex}].rating" placeholder="4.8" step="0.1" min="1" max="5">
+        </div>
+        
+        <div class="form-group">
+            <label>Review Count <span class="field-example">(Example: 127)</span></label>
+            <input type="number" name="products[${productIndex}].reviewCount" placeholder="127">
+        </div>
+        
+        <div class="form-group">
+            <label>Customization Level</label>
+            <select name="products[${productIndex}].customizationLevel">
+                <option value="basic">Basic</option>
+                <option value="standard">Standard</option>
+                <option value="premium" selected>Premium</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label>
+                <input type="checkbox" name="products[${productIndex}].inStock" checked> In Stock
+            </label>
+        </div>
+        
+        <!-- Sizes Section with Custom UI -->
+        <div class="form-group">
+            <label>Product Sizes & Pricing</label>
+            <div id="sizes_${productIndex}_container" class="array-container">
+                <!-- Sizes will be added here -->
+            </div>
+            <button class="add-item-btn" onclick="addSize(${productIndex})">+ Add Size</button>
+        </div>
+        
+        <div class="form-group">
+            <label>Material <span class="field-example">(Example: Premium Wood with Velvet Interior)</span></label>
+            <input type="text" name="products[${productIndex}].specifications.material" placeholder="Premium Wood with Velvet Interior">
+        </div>
+        
+        <div class="form-group">
+            <label>Weight <span class="field-example">(Example: 500 grams)</span></label>
+            <input type="text" name="products[${productIndex}].specifications.weight" placeholder="500 grams">
+        </div>
+        
+        <div class="form-group">
+            <label>Color <span class="field-example">(Example: Natural Wood Finish with Red Roses)</span></label>
+            <input type="text" name="products[${productIndex}].specifications.color" placeholder="Natural Wood Finish with Red Roses">
+        </div>
+        
+        <div class="form-group">
+            <label>Delivery Time <span class="field-example">(Example: 5-7 business days)</span></label>
+            <input type="text" name="products[${productIndex}].shipping.delivery" placeholder="5-7 business days">
+        </div>
+        
+        <div class="form-group">
+            <label>Packaging <span class="field-example">(Example: Premium gift box included)</span></label>
+            <input type="text" name="products[${productIndex}].shipping.packaging" placeholder="Premium gift box included">
+        </div>
+        
+        <div class="form-group">
+            <label>Shipping Cost <span class="field-example">(Example: Free shipping above ₹999)</span></label>
+            <input type="text" name="products[${productIndex}].shipping.shippingCost" placeholder="Free shipping above ₹999">
+        </div>
+        
+        <div class="form-group">
+            <label>Care Instructions <span class="field-example">(Example: Wipe with dry cloth only...)</span></label>
+            <textarea name="products[${productIndex}].careInstructions" placeholder="Wipe with dry cloth only. Keep away from direct sunlight and moisture..."></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label>Features (comma separated) <span class="field-example">(Example: Handcrafted by skilled artisans, Intricate rose pattern...)</span></label>
+            <input type="text" name="products[${productIndex}].features" placeholder="Handcrafted by skilled artisans, Intricate rose pattern carving, Soft velvet interior lining, Brass hinges and clasp, Personalization available, Gift wrapping included">
+        </div>
+    `;
+    
+    container.appendChild(productDiv);
+    
+    // Add initial sizes for this product
+    if (index === 0) {
+        addSize(productIndex, 0); // Small
+        addSize(productIndex, 1); // Medium  
+        addSize(productIndex, 2); // Large
+    }
+}
+
+function addSize(productIndex, sizeIndex = null) {
+    const container = document.getElementById(`sizes_${productIndex}_container`);
+    const sizeIndexActual = sizeIndex !== null ? sizeIndex : container.children.length;
+    
+    const sizeDiv = document.createElement('div');
+    sizeDiv.className = 'array-item size-item';
+    sizeDiv.innerHTML = `
+        <div class="array-item-header">
+            <span class="array-item-title">Size ${sizeIndexActual + 1}</span>
+            <button class="remove-item-btn" onclick="this.parentElement.parentElement.remove()">×</button>
+        </div>
+        
+        <div class="size-fields-row">
+            <div class="form-group size-field">
+                <label>Size ID <span class="field-example">(Example: small)</span></label>
+                <input type="text" name="products[${productIndex}].sizes[${sizeIndexActual}].id" placeholder="small">
+            </div>
+            
+            <div class="form-group size-field">
+                <label>Size Name <span class="field-example">(Example: Small)</span></label>
+                <input type="text" name="products[${productIndex}].sizes[${sizeIndexActual}].name" placeholder="Small">
+            </div>
+            
+            <div class="form-group size-field">
+                <label>Price (₹) <span class="field-example">(Example: 5499)</span></label>
+                <input type="number" name="products[${productIndex}].sizes[${sizeIndexActual}].price" placeholder="5499">
+            </div>
+            
+            <div class="form-group size-field">
+                <label>Original Price (₹) <span class="field-example">(Example: 6999)</span></label>
+                <input type="number" name="products[${productIndex}].sizes[${sizeIndexActual}].originalPrice" placeholder="6999">
+            </div>
+            
+            <div class="form-group size-field">
+                <label>
+                    <input type="checkbox" name="products[${productIndex}].sizes[${sizeIndexActual}].inStock" checked> In Stock
+                </label>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label>Size Description <span class="field-example">(Example: Perfect for small jewelry items...)</span></label>
+            <input type="text" name="products[${productIndex}].sizes[${sizeIndexActual}].description" placeholder="Perfect for small jewelry items (6 x 4 x 3 inches)">
+        </div>
+    `;
+    
+    container.appendChild(sizeDiv);
 }
 
 function generateSimpleField(field) {
@@ -1751,6 +1992,11 @@ function addArrayItem(field, container, index = null) {
 }
 
 function generateJSONFromForm() {
+    // Special handling for products form
+    if (currentFormManager === 'products') {
+        return generateProductsJSON();
+    }
+    
     const config = formFields[currentFormManager];
     const result = {};
     
@@ -1883,4 +2129,70 @@ function downloadGeneratedJSON() {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+}
+
+function generateProductsJSON() {
+    const result = {
+        topSelling: {
+            title: getFieldValue('topSelling.title'),
+            description: getFieldValue('topSelling.description'),
+            productIds: getFieldValue('topSelling.productIds').split(',').map(id => id.trim()).filter(id => id)
+        },
+        products: []
+    };
+    
+    // Get all products
+    const productContainers = document.querySelectorAll('#products_container > .array-item');
+    
+    productContainers.forEach((productDiv, productIndex) => {
+        const product = {
+            id: getFieldValue(`products[${productIndex}].id`),
+            name: getFieldValue(`products[${productIndex}].name`),
+            description: getFieldValue(`products[${productIndex}].description`),
+            images: getFieldValue(`products[${productIndex}].images`).split(',').map(img => img.trim()).filter(img => img),
+            gif: getFieldValue(`products[${productIndex}].gif`),
+            video: getFieldValue(`products[${productIndex}].video`),
+            category: getFieldValue(`products[${productIndex}].category`),
+            occasion: getFieldValue(`products[${productIndex}].occasion`),
+            rating: parseFloat(getFieldValue(`products[${productIndex}].rating`)) || 0,
+            reviewCount: parseInt(getFieldValue(`products[${productIndex}].reviewCount`)) || 0,
+            customizationLevel: getFieldValue(`products[${productIndex}].customizationLevel`),
+            inStock: getFieldValue(`products[${productIndex}].inStock`),
+            sizes: [],
+            specifications: {
+                material: getFieldValue(`products[${productIndex}].specifications.material`),
+                weight: getFieldValue(`products[${productIndex}].specifications.weight`),
+                color: getFieldValue(`products[${productIndex}].specifications.color`)
+            },
+            shipping: {
+                delivery: getFieldValue(`products[${productIndex}].shipping.delivery`),
+                packaging: getFieldValue(`products[${productIndex}].shipping.packaging`),
+                shippingCost: getFieldValue(`products[${productIndex}].shipping.shippingCost`)
+            },
+            careInstructions: getFieldValue(`products[${productIndex}].careInstructions`),
+            features: getFieldValue(`products[${productIndex}].features`).split(',').map(feature => feature.trim()).filter(feature => feature)
+        };
+        
+        // Get all sizes for this product
+        const sizesContainer = document.getElementById(`sizes_${productIndex}_container`);
+        if (sizesContainer) {
+            const sizeDivs = sizesContainer.querySelectorAll('.size-item');
+            
+            sizeDivs.forEach((sizeDiv, sizeIndex) => {
+                const size = {
+                    id: getFieldValue(`products[${productIndex}].sizes[${sizeIndex}].id`),
+                    name: getFieldValue(`products[${productIndex}].sizes[${sizeIndex}].name`),
+                    price: parseFloat(getFieldValue(`products[${productIndex}].sizes[${sizeIndex}].price`)) || 0,
+                    originalPrice: parseFloat(getFieldValue(`products[${productIndex}].sizes[${sizeIndex}].originalPrice`)) || 0,
+                    inStock: getFieldValue(`products[${productIndex}].sizes[${sizeIndex}].inStock`),
+                    description: getFieldValue(`products[${productIndex}].sizes[${sizeIndex}].description`)
+                };
+                product.sizes.push(size);
+            });
+        }
+        
+        result.products.push(product);
+    });
+    
+    return result;
 }
