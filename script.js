@@ -2069,7 +2069,7 @@ function getArrayData(field) {
             if (itemField.type === 'number') {
                 itemData[itemField.name] = parseFloat(value) || 0;
             } else if (itemField.type === 'checkbox') {
-                itemData[itemField.name] = document.getElementById(inputName).checked;
+                itemData[itemField.name] = getFieldValue(inputName);
             } else if (itemField.type.includes('text') || itemField.type === 'textarea') {
                 if (itemField.name.includes('.')) {
                     setNestedValue(itemData, itemField.name, value);
@@ -2099,7 +2099,7 @@ function setNestedValue(obj, path, value) {
 }
 
 function getFieldValue(fieldName) {
-    const element = document.getElementById(fieldName);
+    const element = document.querySelector(`[name="${fieldName}"]`) || document.getElementById(fieldName);
     if (!element) return '';
     
     if (element.type === 'checkbox') {
